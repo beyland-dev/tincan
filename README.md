@@ -14,7 +14,7 @@ Tincan runs a small local daemon (a systemd user service) that talks to your pai
 
 Bluetooth MAP exposes a narrow slice of Messages on iPhone. Tincan is honest about the limits:
 
-- **Works:** incoming iMessage and SMS text, sending replies and new 1:1 messages, contact names and photos, read/unread sync, full-text search, desktop notifications with one-click verification-code copy, automatic reconnect after sleep or range loss, and optional send delays with undo, and optional AI agent access via MCP or the CLI with agent drafts and privacy guardrails.
+- **Works:** incoming iMessage and SMS text, sending replies and new 1:1 messages, contact names and photos, read/unread sync, full-text search, desktop notifications with one-click verification-code copy, automatic reconnect after sleep or range loss, optional send delays with undo, and optional AI agent access via MCP or the CLI with agent drafts and privacy guardrails.
 - **Not supported by Bluetooth MAP:** viewing photo/video/audio attachments (placeholders shown instead), sending to group chats, messages sent from the iPhone itself (MAP's sent folder is empty), full iCloud history (iOS lists only the 10 newest inbox messages on first sync; Tincan keeps history locally from then on), typing indicators, and delivery receipts.
 
 ## Requirements

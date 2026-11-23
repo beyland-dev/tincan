@@ -175,11 +175,28 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
         run: pnpm --filter @beyland/tincan-desktop exec electron-builder --linux "--$ARCH" --publish never
+      # AppImageUpdate and AppImageLauncher read update information from the AppImage and fetch
+      # the matching .zsync from the latest release. Tincan itself never checks for updates.
+      - name: Embed AppImage update information and make its zsync file
+        env:
+          ARCH: ${{ matrix.arch }}
+          REPO: ${{ github.repository }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends zsync
+          label=x86_64; [ "$ARCH" = arm64 ] && label=arm64
+          cd apps/desktop/release
+          for f in *.AppImage; do
+            node ../../../scripts/appimage-update-info.mjs "$f" \
+              "gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|Tincan-*-linux-${label}.AppImage.zsync"
+            zsyncmake -u "$f" -o "$f.zsync" "$f"
+          done
+          ls -l
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: desktop-${{ matrix.arch }}
           path: |
             apps/desktop/release/*.AppImage
+            apps/desktop/release/*.AppImage.zsync
             apps/desktop/release/*.deb
           if-no-files-found: error
 
@@ -321,7 +338,7 @@ jobs:
           merge-multiple: true
       - name: Generate SHA256SUMS
         working-directory: dist-release
-        run: sha256sum *.AppImage *.deb > SHA256SUMS && cat SHA256SUMS
+        run: sha256sum *.AppImage *.AppImage.zsync *.deb > SHA256SUMS && cat SHA256SUMS
       - name: Sign SHA256SUMS (if a signing key is configured)
         working-directory: dist-release
         env:
@@ -358,7 +375,7 @@ jobs:
           PRERELEASE: ${{ needs.guard.outputs.prerelease }}
         run: |
           shopt -s nullglob
-          assets=(dist-release/*.AppImage dist-release/*.deb dist-release/SHA256SUMS dist-release/SHA256SUMS.asc)
+          assets=(dist-release/*.AppImage dist-release/*.AppImage.zsync dist-release/*.deb dist-release/SHA256SUMS dist-release/SHA256SUMS.asc)
           if gh release view "$TAG" >/dev/null 2>&1; then
             # Rerun after a partial failure: replace the assets, keep the notes.
             gh release upload "$TAG" "${assets[@]}" --clobber

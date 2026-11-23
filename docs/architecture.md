@@ -12,7 +12,7 @@ recorded in [decisions/](decisions/).
                                 └──────── D-Bus ────────┘
                                             │
               ┌─────────────── tincan daemon (one per user) ───────────────┐
-              │  @beyland/tincan-native  (Rust addon: tincan-napi → tincan-bt)  │
+              │  @beyland/tincan-native  (napi over tincan-bt + tincan-vault)   │
               │             │ napi (promises, ThreadsafeFunction events)  │
               │  @beyland/tincan-core    (registry, policy, events, …)      │
               │             │                                             │

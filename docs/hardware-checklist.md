@@ -58,8 +58,8 @@ Automated CI never touches a real phone.
 - [ ] With a send delay set, Undo during the countdown keeps the message off the phone; a delayed message that
       reaches the phone is echoed back once (no duplicate bubble)
 - [ ] `tincan settings set`, `tincan draft send`, `tincan draft discard`, `tincan connect <agent>`,
-      `tincan disconnect <agent>` and `tincan thread hide-from-agents <key> --no-hidden` refuse without an
-      interactive terminal, and `--yes` doesn't skip them; `tincan thread hide-from-agents <key> --yes`
+      `tincan disconnect <agent>` and `tincan agents show <person|number|group>` refuse without an
+      interactive terminal, and `--yes` doesn't skip them; `tincan agents hide <contact|number|group> --yes`
       works from a script
 - [ ] Run from an agent's shell (e.g. Claude Code), `tincan threads` says it's running as that agent and follows the
       agent settings

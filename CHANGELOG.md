@@ -93,8 +93,8 @@ The first public release.
 
 - Linux x86_64 or arm64 with glibc 2.35+ (Ubuntu 22.04+, Debian 12+, Fedora 36+).
 - BlueZ 5.64+ with obexd, OpenSSL 3 and systemd; a desktop keyring is recommended.
-- Packages: `.deb` (with the CLI and an AppArmor profile) and AppImage. The CLI alone is on npm
-  (Node.js 22.18+).
+- Packages: `.deb` (with the CLI and an AppArmor profile) and AppImage, which carries update
+  information for AppImageUpdate. The CLI alone is on npm (Node.js 22.18+).
 
 ### Known limitations
 
@@ -110,3 +110,6 @@ Apple's iPhone shares only part of Messages over Bluetooth:
 
 Tincan is alpha software: expect bugs and breaking changes before 1.0, and keep your iPhone as the
 source of truth for your messages.
+
+[Unreleased]: https://github.com/beyland-dev/tincan/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/beyland-dev/tincan/releases/tag/v0.1.0

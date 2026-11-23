@@ -92,7 +92,13 @@
         "deb"
       ],
       "executableName": "tincan-desktop",
-      "maintainer": "Hawk Ticehurst"
+      "maintainer": "Hawk Ticehurst",
+      "synopsis": "iPhone messages on Linux over Bluetooth",
+      "desktop": {
+        "entry": {
+          "Keywords": "iPhone;iMessage;SMS;Messages;Bluetooth;"
+        }
+      }
     },
     "deb": {
       "afterInstall": "../../packaging/deb/after-install.sh",

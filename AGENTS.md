@@ -14,12 +14,16 @@ before changing it.
 | `packages/daemon`     | `@beyland/tincan-daemon`     | Unix-socket NDJSON server, single-instance lock, native addon loading   |
 | `packages/client`     | `@beyland/tincan-client`     | Typed socket client used by the CLI, MCP server and desktop app         |
 | `packages/cli`        | `@beyland/tincan`            | The `tincan` binary; commands are generated from contracts              |
+| `packages/mcp`        | `@beyland/tincan-mcp`        | MCP server over the client, so AI agents can use the daemon             |
 | `packages/native`     | `@beyland/tincan-native`     | JS wrapper for the Rust addon                                           |
 | `packages/fake-phone` | `@beyland/tincan-fake-phone` | Scripted iPhone implementing core's `PhonePort`, for tests and demos    |
+| `apps/desktop`        | `@beyland/tincan-desktop`    | Electron app (private); bundles the daemon and the CLI                  |
 | `crates/tincan-bt`    | —                            | Pure Rust: BlueZ/OBEX over zbus, bMessage and vCard parsers             |
-| `crates/tincan-napi`  | —                            | napi-rs bindings over `tincan-bt`                                       |
+| `crates/tincan-vault` | —                            | Pure Rust: SQLCipher store, key in the Secret Service or a 0600 file    |
+| `crates/tincan-napi`  | —                            | napi-rs bindings over `tincan-bt` and `tincan-vault`                    |
 
-Dependency direction: `protocol` ← `core` ← `daemon` ← `cli`; `client` depends only on `protocol`.
+Dependency direction: `protocol` ← `core` ← `daemon` ← `cli`; `client` depends only on `protocol`, and `mcp`
+only on `client` and `protocol`.
 Clients (CLI, MCP, desktop renderer) must never import `core`, `daemon` or `native`.
 Core reaches the phone only through `PhonePort`; `fake-phone` depends on `core` and `protocol`, never `native`.
 Tests that drive core against a scripted phone (e.g. the sync engine) live in `packages/fake-phone/tests`,
@@ -51,7 +55,7 @@ Use `pnpm exec vp …` if `vp` isn't on your PATH. Run `pnpm exec vp check --fix
    `eventSchemas` in `envelope.ts`.
 4. Test the handler in core and, if it has CLI-specific output, add a formatter in `packages/cli/src/main.ts`.
 
-The CLI, `tincan commands`, `tincan schema` and (later) the MCP server and desktop API pick it up automatically.
+The CLI, `tincan commands`, `tincan schema`, the MCP server and the desktop app pick it up automatically.
 
 ## Conventions
 

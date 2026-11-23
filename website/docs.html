@@ -68,6 +68,11 @@
         </nav>
 
         <article class="docs">
+          <p class="docs-lede">
+            Tincan is a Linux desktop app, with a matching command line, that reads and sends text
+            messages through your iPhone over Bluetooth. Your iPhone keeps doing the sending; Tincan
+            shows new texts on your computer and hands your replies back to the phone.
+          </p>
           <p class="docs-alpha">
             Tincan is early alpha software. Expect rough edges and breaking changes before 1.0.
           </p>
@@ -148,6 +153,12 @@
 ./Tincan-*.AppImage</code></pre>
             </div>
             <p>Requires FUSE 2 (<code>libfuse2</code> on Ubuntu).</p>
+            <p>
+              The AppImage carries update information, so
+              <a href="https://github.com/AppImageCommunity/AppImageUpdate">AppImageUpdate</a> or
+              AppImageLauncher can update it in place from GitHub Releases. Tincan itself never
+              checks for updates.
+            </p>
             <div class="callout warn">
               <p>
                 <strong>Ubuntu 24.04 and newer:</strong> AppArmor restricts the unprivileged user
