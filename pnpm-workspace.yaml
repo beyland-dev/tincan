@@ -10,7 +10,7 @@ catalog:
   "@napi-rs/cli": ^3.10.9
   "@preact/preset-vite": ^2.10.6
   "@preact/signals": ^2.11.3
-  "@types/node": ^24
+  "@types/node": ^26
   electron: ^45.4.1
   electron-builder: ^26.18.0
   jsonc-parser: ^3.3.1
