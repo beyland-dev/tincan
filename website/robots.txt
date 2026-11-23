@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tincan.beyland.dev/sitemap.xml

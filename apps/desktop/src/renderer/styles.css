@@ -4454,37 +4454,6 @@ a.media-caption:hover .media-caption-title,
   padding: 5px 6px;
 }
 
-/* Tincan typing: three dots that rise in turn. */
-.bubble.typing {
-  display: flex;
-  gap: 4px;
-  padding: 12px 14px;
-}
-
-.bubble.typing span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: 0.4;
-  animation: typing-dot 1s ease-in-out infinite;
-}
-
-.bubble.typing span:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.bubble.typing span:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes typing-dot {
-  30% {
-    opacity: 0.9;
-    transform: translateY(-3px);
-  }
-}
-
 /* Quick replies, where the composer would be. */
 .welcome-replies {
   display: flex;
@@ -4494,11 +4463,6 @@ a.media-caption:hover .media-caption-title,
   min-height: 56px;
   padding: 8px 16px 14px;
   transition: opacity 160ms ease;
-}
-
-.welcome-replies.waiting {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .welcome-reply {
@@ -4531,8 +4495,7 @@ a.media-caption:hover .media-caption-title,
 
 @media (prefers-reduced-motion: reduce) {
   .welcome-part,
-  .welcome-beat > .bubble-row.out,
-  .bubble.typing span {
+  .welcome-beat > .bubble-row.out {
     animation: none;
   }
 }

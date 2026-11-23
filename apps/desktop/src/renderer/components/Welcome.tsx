@@ -59,15 +59,6 @@ function loadAnswers(): string[] {
   }
 }
 
-const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/** How long Tincan "types" before a part appears. */
-function typingTime(part: Part): number {
-  if (reducedMotion()) return 0;
-  if (part.card || typeof part.body !== "string") return 650;
-  return Math.min(1300, 400 + part.body.length * 9);
-}
-
 /** Tincan's own avatar, in the sidebar and the conversation's header. */
 export function TincanAvatar({ size = 40 }: { size?: number }) {
   return (
@@ -226,8 +217,6 @@ export function Welcome() {
   const all = beats();
   const current = Math.min(answers.length, all.length - 1);
   const beat = answers.length < all.length ? all[current]! : null;
-  // Parts of the latest beat shown so far; earlier beats (and a reopened conversation) show at once.
-  const [shown, setShown] = useState(() => (answers.length > 0 ? Infinity : 0));
   const list = useRef<HTMLDivElement>(null);
   const first = useRef(true);
 
@@ -236,34 +225,24 @@ export function Welcome() {
     void refreshBackgroundService();
   }, []);
 
-  const parts = beat?.parts.length ?? 0;
-  useEffect(() => {
-    if (!beat || shown >= parts) return;
-    const timer = setTimeout(() => setShown((n) => n + 1), typingTime(beat.parts[shown]!));
-    return () => clearTimeout(timer);
-  }, [answers.length, shown, parts]);
-
   useLayoutEffect(() => {
     const el = list.current;
     if (!el) return;
     el.scrollTo({ top: el.scrollHeight, behavior: first.current ? "auto" : "smooth" });
     first.current = false;
-  }, [answers.length, shown]);
+  }, [answers.length]);
 
   const answer = (reply: Reply) => {
     const next = [...answers, reply.label];
     localStorage.setItem(ANSWERS_KEY, JSON.stringify(next));
     setAnswers(next);
-    setShown(0);
     reply.run?.();
   };
   const restart = () => {
     localStorage.removeItem(ANSWERS_KEY);
     setAnswers([]);
-    setShown(0);
   };
 
-  const typing = beat !== null && shown < beat.parts.length;
   const replies: Reply[] = beat
     ? beat.replies
     : [
@@ -284,10 +263,9 @@ export function Welcome() {
       </header>
       <div class="message-list welcome-list" ref={list} aria-live="polite">
         {all.slice(0, current + 1).map((b, i) => {
-          const visible = i < current || !beat ? b.parts : b.parts.slice(0, shown);
           return (
             <div key={i} class="welcome-beat">
-              {visible.map((part, j) => (
+              {b.parts.map((part, j) => (
                 <TincanPart key={j} part={part} start={j === 0} />
               ))}
               {answers[i] !== undefined && (
@@ -302,22 +280,12 @@ export function Welcome() {
             </div>
           );
         })}
-        {typing && (
-          <div class={`bubble-row in ${shown === 0 ? "start" : ""}`}>
-            <div class="bubble typing" aria-label="Tincan is typing">
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-        )}
       </div>
-      <div class={`welcome-replies ${typing ? "waiting" : ""}`}>
+      <div class="welcome-replies">
         {replies.map((reply) => (
           <button
             key={reply.label}
             class={`welcome-reply ${reply.secondary ? "secondary" : ""}`}
-            disabled={typing}
             onClick={() => {
               if (reply.restart) restart();
               else if (beat) answer(reply);
