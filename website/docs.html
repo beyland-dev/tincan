@@ -323,14 +323,13 @@ tincan doctor            <span class="cm"># verify everything works</span></code
                 with saved contacts or ones you've replied to; elsewhere, click to load them.
               </li>
               <li>
-                <strong>Keyboard shortcuts:</strong> <kbd>Ctrl</kbd>+<kbd>K</kbd> command palette,
-                <kbd>Ctrl</kbd>+<kbd>N</kbd> new message, <kbd>Ctrl</kbd>+<kbd>F</kbd> search,
-                <kbd>Ctrl</kbd>+<kbd>,</kbd> settings.
+                <strong>Keyboard shortcuts:</strong> <kbd>Ctrl+K</kbd> command palette,
+                <kbd>Ctrl+N</kbd> new message, <kbd>Ctrl+F</kbd> search, <kbd>Ctrl+,</kbd> settings.
               </li>
               <li>
                 <strong>Connection help:</strong> Open <strong>Settings › iPhone</strong> for
                 <strong>Copy diagnostics</strong> (and <strong>Fix connection…</strong> when
-                messages are blocked, or anytime via <kbd>Ctrl</kbd>+<kbd>K</kbd>).
+                messages are blocked, or anytime via <kbd>Ctrl+K</kbd>).
               </li>
             </ul>
           </section>
@@ -472,9 +471,8 @@ tincan doctor            <span class="cm"># verify everything works</span></code
               conversation it shows as a see-through bubble with
               <strong>Sending in 8s · Undo · Send now</strong> under it. <strong>Undo</strong> takes
               it back (your text returns to the message box if it's empty), and
-              <strong>Send now</strong> skips the wait. <kbd>Ctrl</kbd>+<kbd>Z</kbd> in an empty
-              message box, or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> anywhere in the
-              conversation, undoes the latest one.
+              <strong>Send now</strong> skips the wait. <kbd>Ctrl+Z</kbd> in an empty message box,
+              or <kbd>Ctrl+Shift+Z</kbd> anywhere in the conversation, undoes the latest one.
             </p>
             <ul>
               <li>
@@ -492,8 +490,8 @@ tincan doctor            <span class="cm"># verify everything works</span></code
               </li>
               <li>
                 <strong>From the CLI:</strong> At a terminal, <code>tincan send</code> counts down
-                on one line and <kbd>Ctrl</kbd>+<kbd>C</kbd> cancels it. With <code>--json</code> or
-                in a script it returns at once and prints the
+                on one line and <kbd>Ctrl+C</kbd> cancels it. With <code>--json</code> or in a
+                script it returns at once and prints the
                 <code>tincan message cancel &lt;id&gt;</code> to run. Set the delays with
                 <code>tincan settings set --send-delay-seconds 5</code> and
                 <code>--agents-send-delay-seconds</code> (0–300).
@@ -529,7 +527,7 @@ tincan service uninstall</code></pre>
             </div>
             <p>
               To run the daemon in the foreground instead, run <code>tincan daemon</code> and stop
-              it with <kbd>Ctrl</kbd>+<kbd>C</kbd>.
+              it with <kbd>Ctrl+C</kbd>.
             </p>
           </section>
 
@@ -742,10 +740,10 @@ tincan disconnect claude        <span class="cm"># remove it again</span></code>
                 <strong>Drafts queue.</strong> Several can wait in one conversation, and for people
                 you have no conversation with yet. The label gains a stepper (<strong
                   >‹ 1 of 3 ›</strong
-                >) to move between them, or use <kbd>Ctrl</kbd>+<kbd>]</kbd> and
-                <kbd>Ctrl</kbd>+<kbd>[</kbd>. If you're already typing, Tincan leaves your text
-                alone and offers <strong>View</strong> instead. Your own draft is a separate slot
-                that agents never touch.
+                >) to move between them, or use <kbd>Ctrl+]</kbd> and <kbd>Ctrl+[</kbd>. If you're
+                already typing, Tincan leaves your text alone and offers
+                <strong>View</strong> instead. Your own draft is a separate slot that agents never
+                touch.
               </li>
               <li>
                 <strong>Nothing expires.</strong> A draft waits until you send or discard it, and
@@ -754,7 +752,7 @@ tincan disconnect claude        <span class="cm"># remove it again</span></code>
               <li>
                 <strong>Easy to find.</strong> A conversation with a draft shows "Draft: …" in the
                 list, a notification tells you when a new one arrives, and
-                <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> opens the next conversation with one.
+                <kbd>Ctrl+Shift+D</kbd> opens the next conversation with one.
               </li>
               <li>
                 <strong>Flagged when it matters.</strong> When a draft has something worth a second
