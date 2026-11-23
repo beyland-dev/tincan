@@ -1,0 +1,11 @@
+// tincan.beyland.dev: this folder, served as static assets by a Cloudflare Worker.
+// Cloudflare builds from the `website` root directory with `npx wrangler deploy`.
+// `name` must match the Worker's name in the Cloudflare dashboard.
+{
+  "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
+  "name": "tincan",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+  },
+}

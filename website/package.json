@@ -1,0 +1,5 @@
+{
+  "name": "tincan-website",
+  "private": true,
+  "description": "tincan.beyland.dev: static files served by Cloudflare (see wrangler.jsonc). Not part of the pnpm workspace, so deploying it never installs the app's dependencies."
+}
