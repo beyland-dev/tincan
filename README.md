@@ -1,6 +1,6 @@
 # Tincan
 
-iMessage and SMS from your iPhone on your Linux laptop, over Bluetooth. No Mac, no jailbreak, and no app to install on your iPhone.
+A Linux desktop app, with a matching command line and MCP server, that reads and sends text messages through your iPhone over Bluetooth.
 
 > [!WARNING]
 > **Tincan is early, alpha software.** Expect bugs, rough edges and breaking changes between releases. Your
