@@ -1858,8 +1858,7 @@ pre code {
 .feature .plate.privacy {
   display: grid;
   place-items: center;
-  aspect-ratio: 4 / 3;
-  padding: clamp(24px, 4vw, 48px);
+  padding: clamp(28px, 4vw, 48px) clamp(20px, 4vw, 48px);
   background:
     radial-gradient(70% 60% at 50% 38%, rgba(95, 209, 139, 0.3), transparent 70%),
     linear-gradient(165deg, #183424, #07110b);
@@ -1872,6 +1871,14 @@ pre code {
   gap: clamp(18px, 3vw, 28px);
   width: 100%;
   text-align: center;
+}
+
+/* Beside its text the picture keeps the other features' proportions; stacked under it on a
+   phone, it grows with its content instead of cropping it. */
+@media (min-width: 761px) {
+  .feature .plate.privacy {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .pv-rings {
