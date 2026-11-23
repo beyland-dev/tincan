@@ -352,9 +352,9 @@ dependencies = [
 
 [[package]]
 name = "napi"
-version = "3.16.1"
+version = "3.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "907ff7366fb7182e28edd0f08ef8ac5d6b13b8d65a3c0b3a10bf3ac092437d6b"
+checksum = "567c62b9c2d0fae123713f766686ad66a2c75b45ba3ee01ed8b06a7e99bc435b"
 dependencies = [
  "bitflags",
  "ctor",
@@ -375,23 +375,23 @@ checksum = "b899b545d3aa6dca985939059f258c5488d34e4ecf39c274e20009748f4b846d"
 
 [[package]]
 name = "napi-derive"
-version = "3.7.0"
+version = "3.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d32eb00f92f84cf462fc328f49082b29c2a7d2eebeb1d447d19c1f9fdd9f89ee"
+checksum = "d3f284288c8a2a4a66519e24dcc0cbfa1b7e0abc37bdd073185c68276f08f3d3"
 dependencies = [
  "convert_case",
- "ctor",
  "napi-derive-backend",
  "proc-macro2",
  "quote",
  "syn 3.0.9",
+ "unicode-ident",
 ]
 
 [[package]]
 name = "napi-derive-backend"
-version = "7.0.0"
+version = "8.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1fe28c64d8fc12e69f9b817d0febdbe7914555760f1e353106281b8ff99cc90"
+checksum = "32477ed34450779386e6aaa3b33bcf3916035b7de0fee68b73716f65a3894003"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -988,9 +988,9 @@ dependencies = [
 
 [[package]]
 name = "zbus"
-version = "6.2.0"
+version = "6.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3666b126b788c05de810dd9e4e8dc84b21f87f7ad70a29a09b9db093f0102891"
+checksum = "9a7f9f5dd97fa527c1202ba1cb35d48e07f77d4de8542317c854f7aef22b0668"
 dependencies = [
  "async-trait",
  "bitflags",
@@ -1016,9 +1016,9 @@ dependencies = [
 
 [[package]]
 name = "zbus_macros"
-version = "6.2.0"
+version = "6.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "20e0bfa90f7877d308d09bdac3586a45c5f5986e58ebf6ec5c3b809c21ad8e22"
+checksum = "2f5aa7f2c4ea81b7ccfb26bafefdb4d1a44dd9d4f82c8426173a3727311743e4"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1041,9 +1041,9 @@ dependencies = [
 
 [[package]]
 name = "zcheapstr"
-version = "1.2.0"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "939f186d9ecebe044315a5cb6d6f78568bbc21152adc954d5a0c2f58bdbc9920"
+checksum = "2da34e7164b75d803c3197b86e6cf61b874106fbd472c5082575a8bc5fbd0907"
 dependencies = [
  "serde",
 ]
