@@ -75,12 +75,11 @@
             <li><a href="#requirements">Requirements</a></li>
             <li><a href="#install">Install</a></li>
             <li><a href="#pairing">First run and pairing</a></li>
+            <li><a href="#service">Background service</a></li>
             <li><a href="#desktop">The desktop app</a></li>
             <li><a href="#cli">The tincan CLI</a></li>
             <li><a href="#send-delays">Send delays</a></li>
-            <li><a href="#service">Background service</a></li>
             <li><a href="#agents">AI agents</a></li>
-            <li><a href="#agent-safety">Agent safety</a></li>
             <li><a href="#privacy">Privacy and security</a></li>
             <li><a href="#troubleshooting">Troubleshooting</a></li>
             <li><a href="#uninstall">Uninstall</a></li>
@@ -279,6 +278,29 @@ tincan doctor            <span class="cm"># verify everything works</span></code
                 keeps its own encrypted copy of everything it sees.
               </li>
             </ol>
+          </section>
+
+          <section id="service">
+            <h2>
+              Background service
+              <a class="heading-anchor" href="#service" aria-label="Link to Background service"
+                >#</a
+              >
+            </h2>
+            <p>
+              Keep the daemon running after you close the window so messages and notifications keep
+              arriving. Turn on <strong>Run in the background</strong> in desktop Settings, or use
+              the CLI:
+            </p>
+            <div class="code-block">
+              <pre><code>tincan service install     <span class="cm"># systemd user service: starts at login, restarts on failure</span>
+tincan service status
+tincan service uninstall</code></pre>
+            </div>
+            <p>
+              To run the daemon in the foreground instead, run <code>tincan daemon</code> and stop
+              it with <kbd>Ctrl+C</kbd>.
+            </p>
           </section>
 
           <section id="desktop">
@@ -506,29 +528,6 @@ tincan doctor            <span class="cm"># verify everything works</span></code
                 its queue, and an agent's own send is cancelled.
               </p>
             </div>
-          </section>
-
-          <section id="service">
-            <h2>
-              Background service
-              <a class="heading-anchor" href="#service" aria-label="Link to Background service"
-                >#</a
-              >
-            </h2>
-            <p>
-              Keep the daemon running after you close the window so messages and notifications keep
-              arriving. Turn on <strong>Run in the background</strong> in desktop Settings, or use
-              the CLI:
-            </p>
-            <div class="code-block">
-              <pre><code>tincan service install     <span class="cm"># systemd user service: starts at login, restarts on failure</span>
-tincan service status
-tincan service uninstall</code></pre>
-            </div>
-            <p>
-              To run the daemon in the foreground instead, run <code>tincan daemon</code> and stop
-              it with <kbd>Ctrl+C</kbd>.
-            </p>
           </section>
 
           <section id="agents">
@@ -794,19 +793,12 @@ tincan disconnect claude        <span class="cm"># remove it again</span></code>
               terminal, <code>tincan drafts</code> lists them, and <code>tincan draft show</code>,
               <code>send</code>, or <code>discard &lt;id&gt;</code> acts on one.
             </p>
-          </section>
 
-          <section id="agent-safety">
-            <h2>
-              Agent safety
-              <a class="heading-anchor" href="#agent-safety" aria-label="Link to Agent safety">#</a>
-            </h2>
-
-            <h3 id="agent-capabilities">
+            <h3 id="agent-safety">
               What agents can and can't do
               <a
                 class="heading-anchor"
-                href="#agent-capabilities"
+                href="#agent-safety"
                 aria-label="Link to What agents can and can't do"
                 >#</a
               >
