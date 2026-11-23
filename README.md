@@ -118,7 +118,9 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/architecture.md](docs/architecture.md), [docs/security.md](docs/security.md), [docs/troubleshooting.md](docs/troubleshooting.md) and [docs/roadmap.md](docs/roadmap.md) for more details. Please report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
+See [docs/architecture.md](docs/architecture.md), [docs/security.md](docs/security.md), [docs/troubleshooting.md](docs/troubleshooting.md) and [docs/roadmap.md](docs/roadmap.md) for more details.
+
+Tincan is open source under the MIT license so you can inspect, build and fork it, though this repo isn't accepting external pull requests. Bug reports are welcome in [Issues](https://github.com/beyland-dev/tincan/issues); please report security or privacy vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
 
 ## Acknowledgements
 

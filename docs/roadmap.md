@@ -1,9 +1,8 @@
 # Roadmap
 
 Tincan is in early, alpha releases. This page describes what works today, what's being worked on, and
-what Tincan deliberately won't do. Plans change; [open an issue](https://github.com/beyland-dev/tincan/issues)
-if something here matters to you. The original design document is kept in
-[history/plan.md](history/plan.md).
+what Tincan deliberately won't do. Plans change as bugs and rough edges come up. The original design
+document is kept in [history/plan.md](history/plan.md).
 
 ## Working today
 
