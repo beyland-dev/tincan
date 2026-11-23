@@ -1,0 +1,39 @@
+{
+  "name": "tincan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "iPhone messages on Linux over Bluetooth, with an agent-drivable core.",
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beyland-dev/tincan.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @beyland/tincan-desktop dev",
+    "build": "vp run -r build",
+    "build:native": "pnpm --filter @beyland/tincan-native build:native",
+    "test": "vp run -r test",
+    "check": "vp check",
+    "ready": "vp check && vp run -r test && vp run -r build",
+    "tincan": "node packages/cli/src/bin.ts"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@12.14.0"
+}

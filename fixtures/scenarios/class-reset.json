@@ -1,0 +1,12 @@
+{
+  "description": "A working iPhone, until BlueZ resets this computer's device class to Computer a few seconds in (as its hostname plugin does). The phone keeps working; pairing again would fail to offer messages. Synthetic data only (555 numbers).",
+  "phone": {
+    "name": "Fake iPhone",
+    "address": "AA:BB:CC:DD:EE:04",
+    "ownNumber": "+1 555 010 0000",
+    "ownerName": "Pat Example"
+  },
+  "contacts": [{ "name": "Ada Lovelace", "tels": ["+1 555 010 0001"], "favorite": true }],
+  "inbox": [{ "from": "+1 555 010 0001", "name": "Ada Lovelace", "body": "Welcome to Tincan!" }],
+  "script": [{ "afterMs": 3000, "adapterClass": 8126732 }]
+}

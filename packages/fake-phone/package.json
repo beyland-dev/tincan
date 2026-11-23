@@ -1,0 +1,52 @@
+{
+  "name": "@beyland/tincan-fake-phone",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A scripted iPhone for Tincan: implements the core's PhonePort for tests, demos and TINCAN_FAKE_PHONE.",
+  "keywords": [
+    "fake",
+    "iphone",
+    "testing",
+    "tincan"
+  ],
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyland-dev/tincan.git",
+    "directory": "packages/fake-phone"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.mjs",
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "vp pack",
+    "test": "vp test"
+  },
+  "dependencies": {
+    "@beyland/tincan-core": "workspace:*",
+    "@beyland/tincan-protocol": "workspace:*",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

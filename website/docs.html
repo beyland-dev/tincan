@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tincan Docs — Install, pair, CLI, and AI agents</title>
+    <meta
+      name="description"
+      content="How to install Tincan on Linux, pair your iPhone, use the desktop app and tincan CLI, and configure AI agent access."
+    />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fafaf8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tincan Docs" />
+    <meta
+      property="og:description"
+      content="Install Tincan, pair your iPhone, and set up the desktop app, the tincan CLI, and AI agents."
+    />
+    <link rel="icon" href="assets/icon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/icon-64.png" sizes="64x64" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/icon-180.png" />
+    <link
+      rel="preload"
+      href="assets/fonts/host-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="docs.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="./">
+          <img src="assets/icon-64.png" alt="" width="24" height="24" /> Tincan
+        </a>
+        <a class="nav-link" href="docs.html" aria-current="page">Docs</a>
+        <a class="nav-link" href="https://github.com/beyland-dev/tincan">GitHub</a>
+        <a class="btn nav" href="download.html">Download</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap docs-head">
+        <h1>Tincan docs</h1>
+      </div>
+
+      <div class="wrap docs-layout">
+        <nav class="docs-toc" aria-labelledby="toc-title">
+          <p class="docs-toc-title" id="toc-title">On this page</p>
+          <ol>
+            <li><a href="#requirements">Requirements</a></li>
+            <li><a href="#install">Install</a></li>
+            <li><a href="#pairing">First run and pairing</a></li>
+            <li><a href="#desktop">The desktop app</a></li>
+            <li><a href="#cli">The tincan CLI</a></li>
+            <li><a href="#send-delays">Send delays</a></li>
+            <li><a href="#service">Background service</a></li>
+            <li><a href="#agents">AI agents</a></li>
+            <li><a href="#agent-safety">Agent safety</a></li>
+            <li><a href="#privacy">Privacy and security</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#uninstall">Uninstall</a></li>
+          </ol>
+        </nav>
+
+        <article class="docs">
+          <p class="docs-alpha">
+            Tincan is early alpha software. Expect rough edges and breaking changes before 1.0.
+          </p>
+          <section id="requirements">
+            <h2>
+              Requirements
+              <a class="heading-anchor" href="#requirements" aria-label="Link to Requirements">#</a>
+            </h2>
+            <p>
+              Tincan connects to your iPhone over Bluetooth — the same way a car stereo does — using
+              the Message Access (MAP), Phone Book Access (PBAP), and Apple Notification Center
+              (ANCS) profiles. A local background service (the daemon) holds the connection and
+              keeps an encrypted copy of what it sees. The desktop app, the <code>tincan</code> CLI,
+              and the MCP server all talk to that daemon. Nothing goes through a cloud server.
+            </p>
+            <ul>
+              <li>
+                <strong>64-bit Linux</strong> (<code>x86_64</code> or <code>arm64</code>) with glibc
+                2.35 or newer: Ubuntu 22.04+, Debian 12+, Fedora 36+, or a current rolling
+                distribution.
+              </li>
+              <li>
+                <strong>BlueZ 5.64+</strong> with <code>obexd</code> (often a separate package, such
+                as <code>bluez-obexd</code>).
+              </li>
+              <li>
+                <strong>OpenSSL 3</strong> (<code>libssl3</code> or <code>libssl3t64</code> on
+                Debian and Ubuntu).
+              </li>
+              <li><strong>systemd</strong>, for the background service.</li>
+              <li>A <strong>Bluetooth adapter</strong> (built-in or USB) and an iPhone nearby.</li>
+              <li>
+                A <strong>desktop keyring</strong> (GNOME Keyring or KWallet), recommended for
+                storing the database key.
+              </li>
+              <li><strong>Node.js 22.18+</strong> (only if installing the CLI from npm).</li>
+            </ul>
+            <p>
+              Only one computer or car can read an iPhone's messages at a time. Over Bluetooth, iOS
+              shares new texts, contacts, and notifications — not photos, messages you send from the
+              iPhone itself, or your full history. See the full list on the
+              <a href="./#limits">homepage</a>.
+            </p>
+          </section>
+
+          <section id="install">
+            <h2>
+              Install
+              <a class="heading-anchor" href="#install" aria-label="Link to Install">#</a>
+            </h2>
+            <p>Get the latest packages from the <a href="download.html">download page</a>.</p>
+
+            <h3 id="install-deb">
+              Desktop app (.deb)
+              <a class="heading-anchor" href="#install-deb" aria-label="Link to Desktop app (.deb)"
+                >#</a
+              >
+            </h3>
+            <p>
+              Recommended on Debian and Ubuntu. Installs the desktop app, the
+              <code>tincan</code> CLI, and the AppArmor profile required on newer Ubuntu.
+            </p>
+            <div class="code-block">
+              <pre><code>sudo apt install ./Tincan-*.deb</code></pre>
+            </div>
+
+            <h3 id="install-appimage">
+              Desktop app (AppImage)
+              <a
+                class="heading-anchor"
+                href="#install-appimage"
+                aria-label="Link to Desktop app (AppImage)"
+                >#</a
+              >
+            </h3>
+            <div class="code-block">
+              <pre><code>chmod +x Tincan-*.AppImage
+./Tincan-*.AppImage</code></pre>
+            </div>
+            <p>Requires FUSE 2 (<code>libfuse2</code> on Ubuntu).</p>
+            <div class="callout warn">
+              <p>
+                <strong>Ubuntu 24.04 and newer:</strong> AppArmor restricts the unprivileged user
+                namespaces Chromium's sandbox needs, so the AppImage may fail to start. Don't work
+                around this with <code>--no-sandbox</code> — that disables the sandbox around the
+                window rendering texts from strangers. Install the <code>.deb</code> instead, or add
+                a local AppArmor profile from
+                <a
+                  href="https://github.com/beyland-dev/tincan/blob/main/docs/troubleshooting.md#the-appimage-wont-start-on-ubuntu-2404-or-newer"
+                  >Troubleshooting</a
+                >.
+              </p>
+            </div>
+
+            <h3 id="install-npm">
+              CLI only (npm)
+              <a class="heading-anchor" href="#install-npm" aria-label="Link to CLI only (npm)"
+                >#</a
+              >
+            </h3>
+            <div class="code-block">
+              <pre><code>npm install -g @beyland/tincan</code></pre>
+            </div>
+            <p>
+              Installs the <code>tincan</code> CLI, the daemon, and the MCP server without the
+              desktop app.
+            </p>
+
+            <h3 id="install-verify">
+              Verify your download
+              <a
+                class="heading-anchor"
+                href="#install-verify"
+                aria-label="Link to Verify your download"
+                >#</a
+              >
+            </h3>
+            <p>
+              Each release includes <code>SHA256SUMS</code> and a signed GitHub Actions build
+              attestation (works for the <code>.deb</code> too).
+            </p>
+            <div class="code-block">
+              <pre><code>sha256sum --check --ignore-missing SHA256SUMS
+gh attestation verify Tincan-*.AppImage --repo beyland-dev/tincan</code></pre>
+            </div>
+          </section>
+
+          <section id="pairing">
+            <h2>
+              First run and pairing
+              <a class="heading-anchor" href="#pairing" aria-label="Link to First run and pairing"
+                >#</a
+              >
+            </h2>
+            <p>
+              The desktop app walks you through setup on first launch. From a terminal, run the same
+              steps:
+            </p>
+            <div class="code-block">
+              <pre><code>tincan setup             <span class="cm"># one-time Bluetooth setup (uses sudo)</span>
+tincan service install   <span class="cm"># start the daemon in the background</span>
+tincan pair              <span class="cm"># pair your iPhone</span>
+tincan doctor            <span class="cm"># verify everything works</span></code></pre>
+            </div>
+            <p>
+              <code>tincan setup</code> enables BlueZ's experimental mode (required for iPhone
+              notifications) and keeps your adapter presenting itself as a hands-free device so iOS
+              offers message sharing. It restarts <code>bluetooth.service</code>, briefly
+              disconnecting Bluetooth keyboards, mice, and headphones. Run it <em>before</em>
+              pairing — if you paired first, forget the computer on your iPhone, restart the iPhone,
+              and pair again.
+            </p>
+            <ol>
+              <li>
+                Keep your iPhone unlocked on <strong>Settings › Bluetooth</strong>. Both screens
+                show a six-digit code; accept only if they match. Tincan rejects pairings that skip
+                code verification.
+              </li>
+              <li>
+                On your iPhone, open <strong>Settings › Bluetooth</strong>, tap
+                <strong>(i)</strong> next to your computer and turn on:
+                <ul>
+                  <li>
+                    <strong>Show Notifications</strong> (or
+                    <strong>Show Message Notifications</strong> on some iOS versions) — lets Tincan
+                    read and send messages.
+                  </li>
+                  <li>
+                    <strong>Sync Contacts</strong> — shows names and photos instead of numbers.
+                  </li>
+                  <li>
+                    <strong>Share System Notifications</strong> (if shown) — improves group
+                    conversation support.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                On first sync, iOS shares only the 10 newest inbox messages. From then on, Tincan
+                keeps its own encrypted copy of everything it sees.
+              </li>
+            </ol>
+          </section>
+
+          <section id="desktop">
+            <h2>
+              The desktop app
+              <a class="heading-anchor" href="#desktop" aria-label="Link to The desktop app">#</a>
+            </h2>
+            <ul>
+              <li>
+                <strong>Conversations:</strong> Appear as messages arrive. Reply from the box at the
+                bottom; send status and retry show under outgoing messages.
+              </li>
+              <li>
+                <strong>Drafts:</strong> Each conversation keeps its own unsent reply, and a
+                conversation with a draft waiting — yours or an
+                <a href="#agents-drafts">agent's</a> — shows "Draft: …" in the list.
+              </li>
+              <li>
+                <strong>Pin or mute:</strong> Use a conversation's menu to pin it to the top of the
+                list or turn off its notifications.
+              </li>
+              <li>
+                <strong>Hide from agents:</strong> Right-click a conversation, or open its info
+                panel, and choose <strong>Hide {name} from agents</strong>. That hides the person:
+                all their numbers and emails, every conversation with them, every group they're in,
+                and their contact. A group can be hidden on its own too. Everything stays in your
+                list, but AI agents can't see it until you show it to them again, and their messages
+                to someone hidden always wait for you as drafts.
+                <strong>Settings › AI agents › Hidden from agents</strong> lists everyone you've
+                hidden, and hides anyone else, even a contact or number you've never texted.
+              </li>
+              <li>
+                <strong>Notifications:</strong> Click a notification to open its conversation.
+                Choose whether notifications show the message, sender only, or nothing in
+                <strong>Settings › General</strong>. Sign-in codes include a
+                <strong>Copy code</strong> button.
+              </li>
+              <li>
+                <strong>Link previews:</strong> Off by default. When turned on in
+                <strong>Settings › Messages &amp; Privacy</strong>, Tincan fetches page titles and
+                images directly from linked sites. Previews load automatically only in conversations
+                with saved contacts or ones you've replied to; elsewhere, click to load them.
+              </li>
+              <li>
+                <strong>Keyboard shortcuts:</strong> <kbd>Ctrl</kbd>+<kbd>K</kbd> command palette,
+                <kbd>Ctrl</kbd>+<kbd>N</kbd> new message, <kbd>Ctrl</kbd>+<kbd>F</kbd> search,
+                <kbd>Ctrl</kbd>+<kbd>,</kbd> settings.
+              </li>
+              <li>
+                <strong>Connection help:</strong> Open <strong>Settings › iPhone</strong> for
+                <strong>Copy diagnostics</strong> (and <strong>Fix connection…</strong> when
+                messages are blocked, or anytime via <kbd>Ctrl</kbd>+<kbd>K</kbd>).
+              </li>
+            </ul>
+          </section>
+
+          <section id="cli">
+            <h2>
+              The tincan CLI
+              <a class="heading-anchor" href="#cli" aria-label="Link to The tincan CLI">#</a>
+            </h2>
+            <p>
+              Every daemon command is available as a <code>tincan</code> subcommand. Add
+              <code>--json</code> for machine-readable output or <code>--help</code> to any command.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Command</th>
+                    <th scope="col">What it does</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>tincan status</code></td>
+                    <td>Daemon and phone connection status</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan doctor</code></td>
+                    <td>Check Bluetooth, BlueZ, and iPhone permissions</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan threads</code></td>
+                    <td>
+                      List conversations by contact name. Add <code>--verbose</code> to see each
+                      conversation&#39;s key (its phone number or email), or <code>--json</code> for
+                      scripts.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan message list &lt;thread&gt;</code></td>
+                    <td>List messages in a conversation</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan message search &lt;text&gt;</code></td>
+                    <td>Search saved messages</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan send &lt;to&gt; &lt;text&gt;</code></td>
+                    <td>Send to a number, email, contact name, or thread</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan message cancel &lt;id&gt;</code></td>
+                    <td>Take back a message still in its <a href="#send-delays">send delay</a></td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan message send-now &lt;id&gt;</code></td>
+                    <td>Send a message in its send delay right away</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan drafts</code></td>
+                    <td>
+                      List <a href="#agents-drafts">agent drafts</a> waiting for you (also
+                      <code>tincan draft list</code>)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan draft show &lt;id&gt;</code></td>
+                    <td>Show one agent draft, with its full text and what became of it</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan draft send &lt;id&gt;</code></td>
+                    <td>Send an agent draft (asks first, at a terminal)</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan draft discard &lt;id&gt;</code></td>
+                    <td>Throw an agent draft away (asks first, at a terminal)</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan thread mark-read &lt;thread&gt;</code></td>
+                    <td>Mark a conversation read, on the iPhone too</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan agents hide &lt;name|number|group&gt;</code></td>
+                    <td>
+                      Hide a person (all their numbers and emails) or a group from AI agents (<code
+                        >tincan agents show</code
+                      >
+                      shows them again, at a terminal; <code>tincan agents hidden</code> lists who's
+                      hidden)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan contact search &lt;query&gt;</code></td>
+                    <td>Find a contact by name, number, or email</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan watch</code></td>
+                    <td>Stream daemon events as they happen</td>
+                  </tr>
+                  <tr>
+                    <td><code>tincan commands</code></td>
+                    <td>List every command (add <code>--json</code> for JSON Schemas)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout note">
+              <p>
+                <strong>Prompts and scripts:</strong> Sending, deleting, and other changes ask for
+                confirmation (<kbd>y</kbd>/<kbd>N</kbd>). In scripts, pass <code>--yes</code>
+                (<code>-y</code>) to run without prompting.
+              </p>
+              <p>
+                <strong>Interactive-only commands:</strong> Commands that change what AI agents may
+                do or act on what they wrote — <code>tincan settings set</code> (for agent
+                settings), <code>tincan draft send</code> / <code>discard</code>,
+                <code>tincan connect</code> / <code>disconnect</code>, and showing someone to agents
+                again with <code>tincan agents show &lt;name|number|group&gt;</code> — require you
+                to confirm at a real terminal. <code>--yes</code> does not skip that prompt, and
+                they refuse to run from an AI agent's shell. The desktop app's
+                <strong>Settings</strong> is the easiest way to manage them.
+              </p>
+              <p>
+                <strong>In an agent's shell:</strong> When <code>tincan</code> runs inside a
+                detected AI agent's shell, it connects as that agent and follows your agent
+                settings. See <a href="#agents-cli">CLI: scripts and agents with shell access</a>.
+              </p>
+            </div>
+          </section>
+
+          <section id="send-delays">
+            <h2>
+              Send delays
+              <a class="heading-anchor" href="#send-delays" aria-label="Link to Send delays">#</a>
+            </h2>
+            <p>
+              A send delay gives you a moment to change your mind. When you press Send, the message
+              waits on your computer for a few seconds before Tincan hands it to your iPhone. In the
+              conversation it shows as a see-through bubble with
+              <strong>Sending in 8s · Undo · Send now</strong> under it. <strong>Undo</strong> takes
+              it back (your text returns to the message box if it's empty), and
+              <strong>Send now</strong> skips the wait. <kbd>Ctrl</kbd>+<kbd>Z</kbd> in an empty
+              message box, or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> anywhere in the
+              conversation, undoes the latest one.
+            </p>
+            <ul>
+              <li>
+                <strong>Send delay</strong> (<strong>Settings › Messages &amp; Privacy</strong>,
+                <code>sendDelaySeconds</code>) is for messages you write yourself. It's off by
+                default; pick 3 to 60 seconds.
+              </li>
+              <li>
+                <strong>Agent message delay</strong> (<strong>Settings › AI agents</strong>,
+                <code>agents.sendDelaySeconds</code>) is for an agent's messages: ones it sends
+                directly, and agent drafts you send. It's 10 seconds by default. While an agent's
+                own send is waiting, the bubble reads
+                <strong>Claude Code is sending in 8s · Edit · Cancel</strong> and a desktop
+                notification offers <strong>Cancel</strong>.
+              </li>
+              <li>
+                <strong>From the CLI:</strong> At a terminal, <code>tincan send</code> counts down
+                on one line and <kbd>Ctrl</kbd>+<kbd>C</kbd> cancels it. With <code>--json</code> or
+                in a script it returns at once and prints the
+                <code>tincan message cancel &lt;id&gt;</code> to run. Set the delays with
+                <code>tincan settings set --send-delay-seconds 5</code> and
+                <code>--agents-send-delay-seconds</code> (0–300).
+              </li>
+            </ul>
+            <div class="callout note">
+              <p>
+                <strong>The delay only holds the message on your computer.</strong> Once it reaches
+                your iPhone, it can't be unsent — Tincan can't use iMessage's Undo Send. If your
+                computer sleeps through a message's send time, Tincan doesn't send it late: your own
+                message is marked not sent so you can retry it, an agent draft you sent goes back to
+                its queue, and an agent's own send is cancelled.
+              </p>
+            </div>
+          </section>
+
+          <section id="service">
+            <h2>
+              Background service
+              <a class="heading-anchor" href="#service" aria-label="Link to Background service"
+                >#</a
+              >
+            </h2>
+            <p>
+              Keep the daemon running after you close the window so messages and notifications keep
+              arriving. Turn on <strong>Run in the background</strong> in desktop Settings, or use
+              the CLI:
+            </p>
+            <div class="code-block">
+              <pre><code>tincan service install     <span class="cm"># systemd user service: starts at login, restarts on failure</span>
+tincan service status
+tincan service uninstall</code></pre>
+            </div>
+            <p>
+              To run the daemon in the foreground instead, run <code>tincan daemon</code> and stop
+              it with <kbd>Ctrl</kbd>+<kbd>C</kbd>.
+            </p>
+          </section>
+
+          <section id="agents">
+            <h2>
+              AI agents
+              <a class="heading-anchor" href="#agents" aria-label="Link to AI agents">#</a>
+            </h2>
+            <p>
+              AI agents can reach Tincan in two ways: over MCP, or by running the
+              <code>tincan</code> CLI from their shell. The same agent settings apply to both.
+            </p>
+
+            <h3 id="agents-mcp">
+              MCP: agents in your editor or terminal
+              <a
+                class="heading-anchor"
+                href="#agents-mcp"
+                aria-label="Link to MCP: agents in your editor or terminal"
+                >#</a
+              >
+            </h3>
+            <p>
+              <code>tincan mcp</code> is an MCP server that agent apps launch over stdio. Add it to
+              a supported app:
+            </p>
+            <div class="code-block">
+              <pre><code>tincan connect                  <span class="cm"># list the apps you can connect</span>
+tincan connect claude           <span class="cm"># add Tincan to Claude Code</span>
+tincan connect claude --print   <span class="cm"># print the config without changing anything</span>
+tincan disconnect claude        <span class="cm"># remove it again</span></code></pre>
+            </div>
+            <p>
+              Run <code>tincan connect &lt;agent&gt;</code> and
+              <code>tincan disconnect &lt;agent&gt;</code> yourself: they ask you to confirm at a
+              terminal and refuse to run from an AI agent's shell. <code>--print</code> runs
+              anywhere. Supported apps: <code>copilot</code> (VS Code, Copilot app, and Copilot
+              CLI), <code>claude</code>, <code>codex</code>, <code>cursor</code>,
+              <code>opencode</code>, <code>antigravity</code>, <code>muse</code>, and
+              <code>pi</code>. Any other MCP client can run <code>tincan mcp</code> over stdio. You
+              can also connect apps in <strong>Settings › AI agents</strong>.
+            </p>
+
+            <h3 id="agents-cli">
+              CLI: scripts and agents with shell access
+              <a
+                class="heading-anchor"
+                href="#agents-cli"
+                aria-label="Link to CLI: scripts and agents with shell access"
+                >#</a
+              >
+            </h3>
+            <p>
+              When <code>tincan</code> runs inside a detected AI agent's shell (Claude Code, Codex,
+              Cursor, Gemini CLI, and others), it connects as that agent — for example
+              <strong>Claude Code (CLI)</strong> — and prints a line saying so. Your agent settings
+              then apply to everything it runs: nothing works while access is Off, reading follows
+              your choices, phone numbers come back as opaque IDs, and <code>tincan send</code> is
+              an agent's message, so it becomes an agent draft for you or waits for the agent
+              message delay. Commands that change what agents may do, or that send or discard agent
+              drafts, are refused.
+            </p>
+            <p>
+              Scripts you run from a normal terminal are treated as you, with your full CLI. There's
+              no switch to turn the detection off, and it isn't a wall: an agent with unrestricted
+              shell access can do anything you can, including hiding the signs Tincan looks for.
+            </p>
+
+            <h3 id="agents-settings">
+              Agent settings
+              <a class="heading-anchor" href="#agents-settings" aria-label="Link to Agent settings"
+                >#</a
+              >
+            </h3>
+            <p>
+              Change these in <strong>Settings › AI agents</strong>, or with
+              <code>tincan settings set --access …</code> at a terminal. First pick an access level;
+              each one shows only the options that make sense for it:
+            </p>
+            <ul>
+              <li>
+                <strong>Off</strong> (the default): agents can't see or send your messages. They can
+                only check that Tincan is running and what access you've given them.
+              </li>
+              <li>
+                <strong>Read only:</strong> agents read the conversations you choose (contacts only,
+                contacts and people you've replied to, or everyone). They can't send, draft, or
+                change anything.
+              </li>
+              <li>
+                <strong>Assistant:</strong> agents can also draft and send messages, and manage
+                conversations if you allow it. By default every message they write is an
+                <a href="#agents-drafts">agent draft</a> for you to send; you can also let them text
+                people you've texted yourself, or send without asking. Sends are capped at 10 every
+                10 minutes unless you change or turn off the limit. Phone numbers, emails, and
+                verification codes stay hidden.
+              </li>
+              <li>
+                <strong>Full access:</strong> everything you allow, with no send limit, and nothing
+                asks first when sending is set to Always. Only here does the
+                <strong>Danger</strong> section appear, with
+                <strong>Show phone numbers &amp; emails to agents</strong> and
+                <strong>Show verification codes to agents</strong>. Both are off by default. Tincan
+                asks you to confirm before switching to Full access.
+              </li>
+            </ul>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Setting</th>
+                    <th scope="col">In the app</th>
+                    <th scope="col">Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>agents.access</code></td>
+                    <td>
+                      Access: Off (<code>off</code>), Read only (<code>readOnly</code>), Assistant
+                      (<code>assistant</code>), Full access (<code>full</code>). Caps every setting
+                      below.
+                    </td>
+                    <td><code>off</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.read</code></td>
+                    <td>
+                      Reading: Off (<code>off</code>, Assistant and Full access only), Contacts only
+                      (<code>contacts</code>), Contacts &amp; people you've replied to
+                      (<code>known</code>), Everyone (<code>all</code>)
+                    </td>
+                    <td><code>known</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.send</code></td>
+                    <td>
+                      Sending (Assistant and Full access): Ask me (<code>approve</code>), Only
+                      people I've texted (<code>replied</code>), Always (<code>always</code>)
+                    </td>
+                    <td><code>approve</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.sendDelaySeconds</code></td>
+                    <td>
+                      Agent message delay (Assistant and Full access): Off or 3–60 seconds (0–300
+                      from the CLI), for agents' messages and agent drafts you send
+                    </td>
+                    <td><code>10</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.sendLimit</code></td>
+                    <td>
+                      Send limit per 10 minutes (1–60, or <code>null</code> for none). A message
+                      counts when it's queued as a draft, and discarding it doesn't give it back.
+                      Assistant only; Full access has no limit.
+                    </td>
+                    <td><code>10</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.manage</code></td>
+                    <td>Manage conversations (mark read, mute, pin)</td>
+                    <td><code>false</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.handles</code></td>
+                    <td>
+                      Show phone numbers &amp; emails to agents (Full access only, under Danger);
+                      <code>visible</code> when on
+                    </td>
+                    <td><code>hidden</code> (off: opaque IDs instead of real addresses)</td>
+                  </tr>
+                  <tr>
+                    <td><code>agents.hideCodes</code></td>
+                    <td>
+                      Show verification codes to agents (Full access only, under Danger);
+                      <code>false</code> when on
+                    </td>
+                    <td><code>true</code> (off: codes and short-code senders hidden)</td>
+                  </tr>
+                  <tr>
+                    <td><code>sendDelaySeconds</code></td>
+                    <td>
+                      Send delay (<strong>Settings › Messages &amp; Privacy</strong>): Off or 3–60
+                      seconds, for messages you write yourself. Not an agent setting; see
+                      <a href="#send-delays">Send delays</a>.
+                    </td>
+                    <td><code>0</code> (off)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 id="agents-drafts">
+              Agent drafts
+              <a class="heading-anchor" href="#agents-drafts" aria-label="Link to Agent drafts"
+                >#</a
+              >
+            </h3>
+            <p>
+              Every message an agent writes that needs you — a draft it saves, or a send your
+              settings don't let go straight out — becomes an <strong>agent draft</strong>. It lands
+              in that conversation's message box, ready to edit, with a small label above it:
+              <strong>Drafted by Claude Code · Discard</strong>. Press Send to send it as it is or
+              as you've changed it, or <strong>Discard</strong> to throw it away. The agent's name
+              is self-reported, so treat it as a label, not proof.
+            </p>
+            <ul>
+              <li>
+                <strong>Drafts queue.</strong> Several can wait in one conversation, and for people
+                you have no conversation with yet. The label gains a stepper (<strong
+                  >‹ 1 of 3 ›</strong
+                >) to move between them, or use <kbd>Ctrl</kbd>+<kbd>]</kbd> and
+                <kbd>Ctrl</kbd>+<kbd>[</kbd>. If you're already typing, Tincan leaves your text
+                alone and offers <strong>View</strong> instead. Your own draft is a separate slot
+                that agents never touch.
+              </li>
+              <li>
+                <strong>Nothing expires.</strong> A draft waits until you send or discard it, and
+                nothing goes unless you press Send. Older drafts show their age.
+              </li>
+              <li>
+                <strong>Easy to find.</strong> A conversation with a draft shows "Draft: …" in the
+                list, a notification tells you when a new one arrives, and
+                <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> opens the next conversation with one.
+              </li>
+              <li>
+                <strong>Flagged when it matters.</strong> When a draft has something worth a second
+                look — hidden or direction-changing characters, a link to a lookalike address,
+                something that looks like a code, or a long blank stretch — small notes appear next
+                to the label.
+              </li>
+              <li>
+                <strong>The agent sees the outcome.</strong> It can check whether its draft was sent
+                (and whether you edited it), discarded, or cancelled. It sees your edited text only
+                in conversations it's allowed to read.
+              </li>
+              <li>
+                <strong>Still the agent's message.</strong> A message you send from an agent draft
+                counts as the agent's, edited or not, and waits for the agent message delay. It
+                never unlocks Only people I've texted; for that, send a message you typed yourself.
+              </li>
+            </ul>
+            <p>How sending decides between a draft and a direct send:</p>
+            <ul>
+              <li>
+                <strong>Ask me</strong> (<code>approve</code>): every message is an agent draft.
+              </li>
+              <li>
+                <strong>Only people I've texted</strong> (<code>replied</code>): a message goes
+                directly only to someone you've texted yourself. Anyone else — even someone who
+                texted you first — gets a draft.
+              </li>
+              <li>
+                <strong>Always</strong> (<code>always</code>): messages go directly, after the agent
+                message delay. Messages to people or groups you've hidden from agents are always
+                drafts, at every access level. Under Assistant, a short-code sender or a raw phone
+                number is still a draft too, and every send counts toward the send limit. Under Full
+                access, nothing else becomes a draft.
+              </li>
+            </ul>
+            <p>
+              Drafts an agent saves on purpose always wait for you, whatever Sending says. From a
+              terminal, <code>tincan drafts</code> lists them, and <code>tincan draft show</code>,
+              <code>send</code>, or <code>discard &lt;id&gt;</code> acts on one.
+            </p>
+          </section>
+
+          <section id="agent-safety">
+            <h2>
+              Agent safety
+              <a class="heading-anchor" href="#agent-safety" aria-label="Link to Agent safety">#</a>
+            </h2>
+
+            <h3 id="agent-capabilities">
+              What agents can and can't do
+              <a
+                class="heading-anchor"
+                href="#agent-capabilities"
+                aria-label="Link to What agents can and can't do"
+                >#</a
+              >
+            </h3>
+            <ul>
+              <li>
+                <strong>With reading on:</strong> List and read the conversations their reading
+                level allows, search those messages, and look up contacts. Anything outside it looks
+                to them as if it doesn't exist.
+              </li>
+              <li>
+                <strong>With Assistant or Full access:</strong> Write agent drafts, send under the
+                rules above, follow what happened to their drafts, and discard their own drafts
+                while they're still waiting. With conversation management on, mark conversations
+                read, muted, or pinned.
+              </li>
+              <li>
+                <strong>Always blocked:</strong> Sending or editing their own drafts, cancelling or
+                hurrying a delayed send, retrying a failed one, deleting conversations, messages, or
+                groups, pairing or forgetting the iPhone, and changing settings.
+              </li>
+              <li>
+                <strong>Hidden from agents:</strong> People and groups you
+                <a href="#desktop">hide from agents</a> never reach them. While
+                <strong>Show verification codes to agents</strong> is off (the default), short-code
+                and alphanumeric senders (banks, sign-ins) are hidden, and verification codes, magic
+                links, and password-reset links are blanked out.
+              </li>
+              <li>
+                <strong>Untrusted tagging and rate limits:</strong> Every message, name, group name,
+                and contact field is marked as untrusted external data. Rate limits cover sending,
+                saving drafts, marking read, muting, and syncing, and survive daemon restarts. At
+                most 5 agent drafts wait in a conversation, and 20 per agent.
+              </li>
+            </ul>
+
+            <div class="callout warn">
+              <p>
+                <strong>Use at your own risk.</strong> Warning: An incoming message could trick an
+                agent into replying with sensitive information or take actions using other tools
+                you've given it. This is prompt injection. Tincan's guardrails reduce the risk; they
+                cannot eliminate it, and code redaction won't catch every format.
+              </p>
+              <p>
+                The agent policy is a guardrail, not an OS security boundary. Any program running as
+                your Linux user — including an agent with shell access — can reach Tincan as you.
+                Grant only the access you need, keep sending on <strong>Ask me</strong> (or choose
+                <strong>Read only</strong>), and read every agent draft before you send it. A send
+                delay only helps if you're there to cancel.
+              </p>
+            </div>
+          </section>
+
+          <section id="privacy">
+            <h2>
+              Privacy and security
+              <a class="heading-anchor" href="#privacy" aria-label="Link to Privacy and security"
+                >#</a
+              >
+            </h2>
+            <ul>
+              <li>
+                <strong>Encrypted local database:</strong> Messages, contacts, and settings are
+                stored on your computer in an encrypted SQLCipher database
+                (<code>~/.local/share/tincan/tincan.db</code>). Its key lives in your desktop
+                keyring (<code>dev.beyland.Tincan.VaultKey</code>), or falls back to a private key
+                file when no keyring exists (which <code>tincan doctor</code> warns about).
+              </li>
+              <li>
+                <strong>Local-only daemon:</strong> The daemon listens only on a private local Unix
+                socket. There is no network port, no account, no telemetry, and no Tincan server.
+              </li>
+              <li>
+                <strong>No sensitive logging:</strong> Message text, phone numbers, and contact
+                names are never written to logs.
+              </li>
+              <li>
+                <strong>Optional network traffic only:</strong> The only internet traffic is link
+                previews and spell check (which downloads a spelling dictionary from Google once).
+                Both are off by default; with both off, the app makes no outbound requests. Link
+                previews only fetch over HTTPS: plain <code>http://</code> links get no preview.
+              </li>
+            </ul>
+            <p>
+              Read the full threat model in
+              <a href="https://github.com/beyland-dev/tincan/blob/main/docs/security.md"
+                >docs/security.md</a
+              >. Found a vulnerability? Report it privately through
+              <a href="https://github.com/beyland-dev/tincan/security/advisories/new"
+                >GitHub's private vulnerability reporting</a
+              >.
+            </p>
+          </section>
+
+          <section id="troubleshooting">
+            <h2>
+              Troubleshooting
+              <a class="heading-anchor" href="#troubleshooting" aria-label="Link to Troubleshooting"
+                >#</a
+              >
+            </h2>
+            <p>
+              Start with <code>tincan doctor</code>. It checks each component and prints how to fix
+              what's missing.
+            </p>
+            <ul>
+              <li>
+                <strong
+                  >No <em>Show Notifications</em> or <em>Sync Contacts</em> toggle on the
+                  iPhone:</strong
+                >
+                Run <code>tincan setup</code>, forget this computer on the iPhone, restart the
+                iPhone, then pair again.
+              </li>
+              <li>
+                <strong>"Busy":</strong> Another computer, car, or Bluetooth messaging app holds the
+                iPhone's message session. Disconnect it and try again.
+              </li>
+              <li>
+                <strong>Messages stopped after re-pairing:</strong> Forget the pairing on both Linux
+                (<code>tincan device forget</code>) and the iPhone, restart the iPhone, then pair
+                again from Tincan.
+              </li>
+            </ul>
+            <p>
+              More fixes are in
+              <a href="https://github.com/beyland-dev/tincan/blob/main/docs/troubleshooting.md"
+                >docs/troubleshooting.md</a
+              >. When opening an issue, attach <code>tincan doctor --report</code> — it masks
+              Bluetooth addresses, device names, and home-folder paths. Read it before pasting, and
+              never include message text, phone numbers, or contact names.
+            </p>
+          </section>
+
+          <section id="uninstall">
+            <h2>
+              Uninstall
+              <a class="heading-anchor" href="#uninstall" aria-label="Link to Uninstall">#</a>
+            </h2>
+            <div class="code-block">
+              <pre><code>tincan disconnect &lt;agent&gt;   <span class="cm"># for each agent app you connected</span>
+tincan service uninstall   <span class="cm"># stop and remove the background service</span>
+tincan setup uninstall     <span class="cm"># undo Bluetooth setup (uses sudo)</span></code></pre>
+            </div>
+            <p>Then remove the app itself:</p>
+            <ul>
+              <li>
+                <strong>.deb:</strong> Run <code>dpkg -S /opt/Tincan</code> to find the package
+                name, then <code>sudo apt remove &lt;name&gt;</code>.
+              </li>
+              <li>
+                <strong>AppImage:</strong> Delete the file (and
+                <code>/etc/apparmor.d/tincan-appimage</code> if you created one).
+              </li>
+              <li><strong>npm:</strong> <code>npm uninstall -g @beyland/tincan</code></li>
+            </ul>
+            <p>
+              Your messages stay in <code>~/.local/share/tincan</code> until you delete that folder.
+              Remove the database key (<code>dev.beyland.Tincan.VaultKey</code>) using your keyring
+              app (such as Passwords and Keys). Finally, forget this computer on your iPhone under
+              <strong>Settings › Bluetooth</strong>.
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <a class="brand" href="./">
+            <img src="assets/icon-64.png" alt="" width="24" height="24" /> Tincan
+          </a>
+          <nav aria-label="Footer">
+            <a href="docs.html" aria-current="page">Docs</a>
+            <a href="download.html">Download</a>
+            <a href="https://github.com/beyland-dev/tincan">GitHub</a>
+            <a href="https://github.com/beyland-dev/tincan/security">Security</a>
+          </nav>
+        </div>
+        <p class="footer-legal">
+          MIT licensed. Apple, iPhone, and iMessage are trademarks of Apple Inc. Not affiliated with
+          or endorsed by Apple.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

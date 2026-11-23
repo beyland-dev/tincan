@@ -1,0 +1,81 @@
+name: Bug Report
+description: Report a bug or Bluetooth/messaging issue in Tincan
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Issues are public.** Please do **not** paste message content, phone numbers, email
+        addresses, contact names, screenshots of real conversations, or unredacted logs.
+
+        For diagnostics, use `tincan doctor --report` or the desktop app's **Copy diagnostics**
+        button. They mask Bluetooth addresses (both `AA:BB:…` and `dev_AA_BB_…` forms), device
+        names and home-directory paths, but they can't know everything that's personal to you:
+        **review the report before pasting it** and remove anything you'd rather not share.
+
+        Found a security or privacy vulnerability? Report it privately instead:
+        https://github.com/beyland-dev/tincan/security/advisories/new
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected to happen. Describe messages generically (e.g. "a text with a link") rather than quoting them.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install Tincan?
+      options:
+        - .deb
+        - AppImage
+        - npm (@beyland/tincan)
+        - From source
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Tincan version
+      placeholder: e.g. 0.1.0 (tincan --version)
+    validations:
+      required: true
+  - type: input
+    id: distro
+    attributes:
+      label: Linux distribution & version
+      placeholder: e.g. Fedora 42, Ubuntu 24.04, Arch Linux
+    validations:
+      required: true
+  - type: input
+    id: bluez
+    attributes:
+      label: BlueZ version
+      placeholder: e.g. 5.72 (bluetoothctl --version)
+  - type: input
+    id: ios
+    attributes:
+      label: iOS version
+      placeholder: e.g. iOS 18.4
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics (`tincan doctor --report`)
+      description: Paste the output of `tincan doctor --report` or Settings › Copy diagnostics, after reviewing it.
+      render: text
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I've reviewed everything above and it contains no message content, phone numbers, contact names or other personal data.
+          required: true

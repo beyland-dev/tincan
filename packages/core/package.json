@@ -1,0 +1,55 @@
+{
+  "name": "@beyland/tincan-core",
+  "version": "0.1.0",
+  "description": "Headless core for Tincan: command registry, agent policy, events, sync and store.",
+  "keywords": [
+    "imessage",
+    "iphone",
+    "linux",
+    "messaging",
+    "sms",
+    "tincan"
+  ],
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyland-dev/tincan.git",
+    "directory": "packages/core"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.mjs",
+      "./package.json": "./package.json"
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "test": "vp test",
+    "prepack": "node ../../scripts/copy-package-files.mjs LICENSE"
+  },
+  "dependencies": {
+    "@beyland/tincan-protocol": "workspace:*",
+    "libphonenumber-js": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

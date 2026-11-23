@@ -1,0 +1,67 @@
+{
+  "name": "@beyland/tincan",
+  "version": "0.1.0",
+  "description": "The `tincan` command line: run the daemon and call any Tincan command.",
+  "keywords": [
+    "bluetooth",
+    "imessage",
+    "iphone",
+    "linux",
+    "mcp",
+    "sms",
+    "tincan"
+  ],
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyland-dev/tincan.git",
+    "directory": "packages/cli"
+  },
+  "bin": {
+    "tincan": "./src/bin.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "bin": {
+      "tincan": "./dist/bin.mjs"
+    },
+    "exports": {
+      ".": "./dist/index.mjs",
+      "./package.json": "./package.json"
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack && node -e \"import('node:fs').then(fs => fs.cpSync('../../packaging/system-setup', 'dist/system-setup', { recursive: true }))\"",
+    "test": "vp test",
+    "prepack": "node ../../scripts/copy-package-files.mjs LICENSE"
+  },
+  "dependencies": {
+    "@beyland/tincan-client": "workspace:*",
+    "@beyland/tincan-core": "workspace:*",
+    "@beyland/tincan-daemon": "workspace:*",
+    "@beyland/tincan-mcp": "workspace:*",
+    "@beyland/tincan-protocol": "workspace:*",
+    "jsonc-parser": "catalog:",
+    "libphonenumber-js": "catalog:"
+  },
+  "devDependencies": {
+    "@beyland/tincan-fake-phone": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

@@ -1,0 +1,60 @@
+# cargo-deny configuration (https://embarkstudios.github.io/cargo-deny/).
+# Run with `cargo deny check` from the repository root. The fuzz harness in
+# `fuzz/` is its own workspace and isn't covered.
+
+[graph]
+# The addon only ships for these targets (packages/native/package.json).
+targets = ["x86_64-unknown-linux-gnu", "aarch64-unknown-linux-gnu"]
+all-features = false
+
+[advisories]
+version = 2
+db-urls = ["https://github.com/rustsec/advisory-db"]
+yanked = "deny"
+# Add RUSTSEC ids here only with a comment saying why they don't apply.
+ignore = []
+
+[licenses]
+version = 2
+confidence-threshold = 0.93
+# The allowlist is policy, not an inventory: a license no crate uses yet is fine.
+unused-allowed-license = "allow"
+# Every license in the dependency tree must be one of these. For crates
+# offered under several licenses (`MIT OR Apache-2.0 OR LGPL-2.1-or-later`,
+# e.g. r-efi), cargo-deny accepts the expression when any alternative is
+# allowed, and Tincan takes them under MIT.
+allow = [
+  "MIT",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "Zlib",
+  "Unicode-3.0",
+  "Unlicense",
+]
+exceptions = [
+  # SQLite is public domain (the "blessing"); SQLCipher is BSD-3-Clause; the
+  # bundled libtomcrypt is WTFPL-style public domain.
+  { crate = "sqlcipher-src", allow = ["blessing", "WTFPL"] },
+]
+
+[licenses.private]
+# The workspace crates are `publish = false` and covered by the repository
+# license.
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+# Workspace path dependencies (tincan-bt, tincan-vault) carry no version;
+# that is fine for these private crates.
+allow-wildcard-paths = true
+highlight = "all"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

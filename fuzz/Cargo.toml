@@ -1,0 +1,78 @@
+# cargo-fuzz harness for Tincan's parsers. Its own workspace (excluded from
+# the main one), so `cargo build/test --workspace` never builds it.
+#
+#   cargo install cargo-fuzz
+#   cargo +nightly fuzz run parse_bmessage_bytes
+#
+# Targets only call pure parsing code: nothing here touches D-Bus, BlueZ or
+# a phone.
+
+[package]
+name = "tincan-fuzz"
+version = "0.0.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+arbitrary = { version = "1", features = ["derive"] }
+libfuzzer-sys = "0.4"
+tincan-bt = { path = "../crates/tincan-bt" }
+
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "parse_bmessage_bytes"
+path = "fuzz_targets/parse_bmessage_bytes.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "parse_vcards"
+path = "fuzz_targets/parse_vcards.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "unfold"
+path = "fuzz_targets/unfold.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "ancs_data_source"
+path = "fuzz_targets/ancs_data_source.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "ancs_source_event"
+path = "fuzz_targets/ancs_source_event.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "parse_map_timestamp"
+path = "fuzz_targets/parse_map_timestamp.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "bmessage_round_trip"
+path = "fuzz_targets/bmessage_round_trip.rs"
+test = false
+doc = false
+bench = false

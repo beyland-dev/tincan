@@ -1,0 +1,99 @@
+{
+  "description": "A busy group chat plus a few one-to-one threads. Synthetic data only (555 numbers, example.com).",
+  "phone": {
+    "name": "Fake iPhone",
+    "address": "AA:BB:CC:DD:EE:01",
+    "ownNumber": "+1 555 010 0000",
+    "ownerName": "Pat Example",
+    "echoDelayMs": 2000
+  },
+  "contacts": [
+    { "name": "Ada Lovelace", "tels": ["+1 555 010 0001"], "favorite": true },
+    { "name": "Grace Hopper", "tels": ["+1 555 010 0002"] },
+    { "name": "Alan Turing", "tels": ["+1 555 010 0003"], "emails": ["alan@example.com"] },
+    { "name": "Katherine Johnson", "tels": ["+1 555 010 0004"] }
+  ],
+  "inbox": [
+    {
+      "from": "5550100001",
+      "name": "Ada Lovelace",
+      "body": "Are we still on for Saturday?",
+      "minutesAgo": 180,
+      "read": true
+    },
+    {
+      "from": "5550100002",
+      "name": "Grace Hopper",
+      "body": "Found a bug. An actual moth.",
+      "minutesAgo": 95,
+      "read": true
+    },
+    {
+      "from": "alan@example.com",
+      "name": "Alan Turing",
+      "body": "Did you get my last message?",
+      "minutesAgo": 40
+    },
+    {
+      "from": "5550100001",
+      "name": "Ada Lovelace",
+      "body": "Book club: chapter 4 for next week",
+      "minutesAgo": 12
+    }
+  ],
+  "notifications": [
+    {
+      "appId": "com.example.calendar",
+      "appName": "Calendar",
+      "title": "Book club",
+      "body": "Saturday 10:00",
+      "category": "schedule"
+    }
+  ],
+  "script": [
+    {
+      "afterMs": 3000,
+      "receive": {
+        "from": "5550100002",
+        "name": "Grace Hopper",
+        "body": "Chapter 4 is a long one",
+        "group": "Book club"
+      }
+    },
+    {
+      "afterMs": 1500,
+      "receive": {
+        "from": "5550100004",
+        "name": "Katherine Johnson",
+        "body": "I'll bring snacks",
+        "group": "Book club"
+      }
+    },
+    {
+      "afterMs": 1500,
+      "receive": {
+        "from": "5550100001",
+        "name": "Ada Lovelace",
+        "body": "Perfect, see you all there",
+        "group": "Book club"
+      }
+    },
+    { "afterMs": 4000, "readOnPhone": "5550100001" },
+    { "afterMs": 5000, "disconnect": true },
+    {
+      "afterMs": 3000,
+      "receive": { "from": "5550100003", "name": "Alan Turing", "body": "Sent while you were away" }
+    },
+    { "afterMs": 5000, "reconnect": true },
+    { "afterMs": 2000, "failNextPush": "TIMEOUT" },
+    {
+      "afterMs": 2000,
+      "receive": {
+        "from": "5550100002",
+        "name": "Grace Hopper",
+        "body": "Who's driving?",
+        "group": "Book club"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "description": "A paired iPhone that isn't offering messages to this computer (Show Message Notifications off), so MAP keeps failing with NOT_FOUND until it's turned on a minute in. Synthetic data only (555 numbers).",
+  "phone": {
+    "name": "Fake iPhone",
+    "address": "AA:BB:CC:DD:EE:03",
+    "ownNumber": "+1 555 010 0000",
+    "ownerName": "Pat Example",
+    "shareMessages": false
+  },
+  "contacts": [{ "name": "Ada Lovelace", "tels": ["+1 555 010 0001"], "favorite": true }],
+  "inbox": [{ "from": "+1 555 010 0001", "name": "Ada Lovelace", "body": "Welcome to Tincan!" }],
+  "script": [
+    { "afterMs": 1000, "disconnect": true },
+    { "reconnect": true },
+    { "afterMs": 1000, "disconnect": true },
+    { "reconnect": true },
+    { "afterMs": 60000, "shareMessages": true }
+  ]
+}

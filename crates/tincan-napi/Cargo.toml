@@ -1,0 +1,26 @@
+[package]
+name = "tincan-napi"
+description = "Node.js bindings (napi-rs) for Tincan's native layer"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+futures-util.workspace = true
+tincan-bt.workspace = true
+tincan-vault.workspace = true
+napi.workspace = true
+napi-derive.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+zbus.workspace = true
+
+[build-dependencies]
+napi-build.workspace = true

@@ -1,0 +1,12 @@
+{
+  "description": "An iPhone that isn't paired yet, to try pairing (`tincan pair` or the app's Pair dialog). Synthetic data only (555 numbers).",
+  "phone": {
+    "name": "Fake iPhone",
+    "address": "AA:BB:CC:DD:EE:02",
+    "ownNumber": "+1 555 010 0000",
+    "ownerName": "Pat Example",
+    "paired": false
+  },
+  "contacts": [{ "name": "Ada Lovelace", "tels": ["+1 555 010 0001"], "favorite": true }],
+  "inbox": [{ "from": "+1 555 010 0001", "name": "Ada Lovelace", "body": "Welcome to Tincan!" }]
+}

@@ -1,0 +1,54 @@
+{
+  "name": "@beyland/tincan-client",
+  "version": "0.1.0",
+  "description": "Typed client for the Tincan daemon socket.",
+  "keywords": [
+    "client",
+    "imessage",
+    "linux",
+    "ndjson",
+    "sms",
+    "tincan",
+    "unix-socket"
+  ],
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyland-dev/tincan.git",
+    "directory": "packages/client"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.mjs",
+      "./package.json": "./package.json"
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "test": "vp test",
+    "prepack": "node ../../scripts/copy-package-files.mjs LICENSE"
+  },
+  "dependencies": {
+    "@beyland/tincan-protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

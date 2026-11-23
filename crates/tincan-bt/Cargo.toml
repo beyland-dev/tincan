@@ -1,0 +1,25 @@
+[package]
+name = "tincan-bt"
+description = "Bluetooth (BlueZ MAP/PBAP/ANCS) and message-format parsing for Tincan"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+base64.workspace = true
+futures-util.workspace = true
+libc.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+zbus = { workspace = true, features = ["service"] }
+
+[dev-dependencies]
+serde_json.workspace = true
+tokio = { workspace = true, features = ["test-util"] }
+zbus = { workspace = true, features = ["p2p", "service"] }
+tracing-subscriber.workspace = true

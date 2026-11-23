@@ -1,0 +1,117 @@
+{
+  "name": "@beyland/tincan-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tincan desktop app: iPhone messages on Linux.",
+  "homepage": "https://tincan.beyland.dev",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beyland-dev/tincan.git",
+    "directory": "apps/desktop"
+  },
+  "type": "module",
+  "main": "dist/main.mjs",
+  "scripts": {
+    "build": "vp pack && vp build",
+    "dev": "node ./scripts/dev.mjs",
+    "install-desktop-entry": "node ./scripts/install-desktop-entry.mjs",
+    "package:linux": "node ./scripts/stage-daemon.mjs && electron-builder --linux --publish never",
+    "stage:daemon": "node ./scripts/stage-daemon.mjs",
+    "start": "node ./scripts/start.mjs",
+    "test": "vp test"
+  },
+  "dependencies": {
+    "@beyland/tincan-client": "workspace:*",
+    "@beyland/tincan-protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "catalog:",
+    "@preact/signals": "catalog:",
+    "@types/node": "catalog:",
+    "electron": "catalog:",
+    "electron-builder": "catalog:",
+    "libphonenumber-js": "catalog:",
+    "lite-youtube-embed": "catalog:",
+    "preact": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "build": {
+    "appId": "dev.beyland.tincan",
+    "productName": "Tincan",
+    "artifactName": "Tincan-${version}-${os}-${arch}.${ext}",
+    "asar": true,
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "resources/app-icon-rounded.png"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/daemon",
+        "to": "daemon"
+      },
+      {
+        "from": "../../packaging/system-setup",
+        "to": "system-setup"
+      },
+      {
+        "from": "../../LICENSE",
+        "to": "LICENSE"
+      },
+      {
+        "from": "../../NOTICE",
+        "to": "NOTICE"
+      },
+      {
+        "from": "../../THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "publish": null,
+    "electronFuses": {
+      "runAsNode": true,
+      "enableCookieEncryption": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true,
+      "grantFileProtocolExtraPrivileges": false
+    },
+    "linux": {
+      "category": "Network;InstantMessaging",
+      "icon": "resources/app-icon-rounded.png",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "executableName": "tincan-desktop",
+      "maintainer": "Hawk Ticehurst"
+    },
+    "deb": {
+      "afterInstall": "../../packaging/deb/after-install.sh",
+      "afterRemove": "../../packaging/deb/after-remove.sh",
+      "depends": [
+        "bluez",
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1",
+        "libsecret-1-0",
+        "libssl3 | libssl3t64"
+      ]
+    }
+  },
+  "desktopName": "tincan-desktop.desktop",
+  "productName": "Tincan"
+}

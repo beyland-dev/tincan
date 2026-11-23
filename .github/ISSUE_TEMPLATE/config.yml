@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/beyland-dev/tincan/security/advisories/new
+    about: Please report security and privacy problems privately, not as a public issue.
+  - name: Documentation and troubleshooting
+    url: https://tincan.beyland.dev/docs.html
+    about: Install, pairing, CLI and agent setup, plus common fixes, on one page.
+  - name: Troubleshooting guide
+    url: https://github.com/beyland-dev/tincan/blob/main/docs/troubleshooting.md
+    about: Fixes for pairing, missing iPhone toggles, BUSY errors and the AppImage on Ubuntu 24.04.

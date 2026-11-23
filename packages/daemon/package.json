@@ -1,0 +1,60 @@
+{
+  "name": "@beyland/tincan-daemon",
+  "version": "0.1.0",
+  "description": "Tincan daemon: the Unix socket server that hosts the core and the Bluetooth layer.",
+  "keywords": [
+    "bluetooth",
+    "bluez",
+    "daemon",
+    "imessage",
+    "linux",
+    "sms",
+    "tincan"
+  ],
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyland-dev/tincan.git",
+    "directory": "packages/daemon"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.mjs",
+      "./package.json": "./package.json"
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "test": "vp test",
+    "prepack": "node ../../scripts/copy-package-files.mjs LICENSE"
+  },
+  "dependencies": {
+    "@beyland/tincan-core": "workspace:*",
+    "@beyland/tincan-protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@beyland/tincan-client": "workspace:*",
+    "@beyland/tincan-fake-phone": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "optionalDependencies": {
+    "@beyland/tincan-native": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

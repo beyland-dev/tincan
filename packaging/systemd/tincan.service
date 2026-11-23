@@ -1,0 +1,43 @@
+# Tincan daemon, run as a systemd user service.
+#
+# `tincan service install` writes this unit for you, with ExecStart pointing at the tincan you ran.
+# To install it by hand (create the ReadWritePaths directories first: systemd skips missing ones):
+#
+#   mkdir -p ~/.local/share/tincan ~/.config/tincan
+#   install -Dm644 packaging/systemd/tincan.service ~/.config/systemd/user/tincan.service
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now tincan.service
+#
+# Adjust ExecStart if `tincan` is not on systemd's PATH (e.g. a pnpm global bin).
+
+[Unit]
+Description=Tincan — iPhone messages on Linux
+Documentation=https://tincan.beyland.dev
+After=bluetooth.target dbus.socket
+Wants=bluetooth.target
+# Give up after 3 failed starts in a minute instead of retrying forever.
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env tincan daemon
+Restart=on-failure
+RestartSec=5
+# 203/EXEC: the program is gone (e.g. Tincan was uninstalled); restarting won't help.
+RestartPreventExitStatus=203
+UMask=0077
+# ProtectSystem=strict leaves $XDG_RUNTIME_DIR read-only, so systemd makes the socket's directory.
+RuntimeDirectory=tincan
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths="-%h/.local/share/tincan" "-%h/.config/tincan"
+# No RestrictAddressFamilies=: the daemon itself only needs AF_UNIX (its socket, D-Bus), but it
+# runs agent CLIs (`claude mcp add`), clipboard tools and doctor probes that may need others.
+
+[Install]
+WantedBy=default.target

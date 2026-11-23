@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+node_modules
+dist
+*.local
+
+# dotenv
+.env
+.env.*
+!.env.example
+
+# Rust / napi
+target/
+*.node
+
+# Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.sw?
+
+# Agent worktrees
+.claude/worktrees/
+
+# Desktop packaging output
+apps/desktop/release/
+apps/desktop/resources/daemon/
+
+# Repo-root files copied into packages by scripts/copy-package-files.mjs (prepack)
+packages/*/LICENSE
+packages/native/NOTICE
+packages/native/THIRD_PARTY_NOTICES.md
+
+# napi release staging (scripts/pack-npm.mjs)
+packages/native/npm/
+packages/native/artifacts/
+npm-tarballs/
+
+# Raw MAP/PBAP spike output (`map_spike --raw-dir spike-raw`): unredacted messages, never commit
+spike-raw/
+raw/
+*.bmsg.raw
+
+# cargo-fuzz
+fuzz/target/
+fuzz/corpus/
+fuzz/artifacts/

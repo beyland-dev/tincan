@@ -1,0 +1,66 @@
+{
+  "name": "@beyland/tincan-native",
+  "version": "0.1.0",
+  "description": "Native layer for Tincan: BlueZ, MAP, bMessage and vCard (napi-rs bindings for the tincan-bt crate).",
+  "keywords": [
+    "bluetooth",
+    "bluez",
+    "linux",
+    "map",
+    "napi-rs",
+    "obex",
+    "tincan",
+    "vcard"
+  ],
+  "homepage": "https://tincan.beyland.dev",
+  "bugs": "https://github.com/beyland-dev/tincan/issues",
+  "license": "MIT",
+  "author": "Hawk Ticehurst",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyland-dev/tincan.git",
+    "directory": "packages/native"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "os": [
+    "linux"
+  ],
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build:native": "napi build --platform --release --manifest-path ../../crates/tincan-napi/Cargo.toml --output-dir . --esm",
+    "build:native:debug": "napi build --platform --manifest-path ../../crates/tincan-napi/Cargo.toml --output-dir . --esm",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "prepack": "node ../../scripts/copy-package-files.mjs LICENSE NOTICE THIRD_PARTY_NOTICES.md"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "catalog:",
+    "@types/node": "catalog:"
+  },
+  "napi": {
+    "binaryName": "tincan-native",
+    "targets": [
+      "x86_64-unknown-linux-gnu",
+      "aarch64-unknown-linux-gnu"
+    ]
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

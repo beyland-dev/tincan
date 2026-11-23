@@ -1,0 +1,1985 @@
+/* Generated from apps/desktop/src/renderer/styles.css (and lite-youtube-embed's stylesheet) by
+   scoping every rule under .app-shot and keeping only what the website's mock-ups use. Copy
+   changes over from the app rather than restyling here. */
+
+.app-shot {
+  --bg: #ffffff;
+  --bg-side: #f5f5f7;
+  --bg-hover: rgba(0, 0, 0, 0.05);
+  --bg-active: #0a84ff;
+  --bg-input: rgba(0, 0, 0, 0.05);
+  --bg-elevated: #ffffff;
+  --text: #1d1d1f;
+  --text-muted: #6e6e73;
+  --text-on-accent: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --accent: #0a84ff;
+  --bubble-in: #e9e9eb;
+  --bubble-in-text: #1d1d1f;
+  --bubble-out: #0a84ff;
+  --bubble-out-text: #ffffff;
+  --danger: #ff3b30;
+  --warn-bg: #fff4d6;
+  --warn-text: #6b4e00;
+  --ok: #34c759;
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  --radius: 10px;
+
+  --titlebar: 48px;
+  --avatar-ring: var(--bg);
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, "Segoe UI", Cantarell, "Noto Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.app-shot.dark {
+  --bg: #1c1c1e;
+  --bg-side: #252527;
+  --bg-hover: rgba(255, 255, 255, 0.06);
+  --bg-input: rgba(255, 255, 255, 0.08);
+  --bg-elevated: #2c2c2e;
+  --text: #f5f5f7;
+  --text-muted: #98989d;
+  --border: rgba(255, 255, 255, 0.1);
+  --bubble-in: #3a3a3c;
+  --bubble-in-text: #f5f5f7;
+  --warn-bg: #3d3420;
+  --warn-text: #ffd479;
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.app-shot * {
+  box-sizing: border-box;
+}
+
+.app-shot,
+.app-shot,
+.app-shot {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-shot button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.app-shot button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.app-shot :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.app-shot h2,
+.app-shot h3,
+.app-shot p {
+  margin: 0;
+}
+
+.app-shot code {
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  font-size: 0.92em;
+}
+
+.app-shot .app {
+  display: grid;
+  grid-template-columns: var(--sidebar-width, 300px) 1fr;
+  height: 100%;
+}
+
+.app-shot .app.sidebar-collapsed {
+  grid-template-columns: 1fr;
+}
+
+.app-shot .main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.app-shot .icon-button {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  color: var(--text-muted);
+}
+
+.app-shot .icon-button:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.app-shot .icon-button.small {
+  width: 22px;
+  height: 22px;
+}
+
+.app-shot .link {
+  color: var(--accent);
+  padding: 0;
+}
+
+.app-shot .link:hover {
+  text-decoration: underline;
+}
+
+.app-shot .toolbar {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.app-shot .avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 600;
+  user-select: none;
+}
+
+.app-shot .avatar-stack {
+  position: relative;
+  flex: none;
+}
+
+.app-shot .avatar-stack > span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+}
+
+.app-shot .avatar-stack-back {
+  top: 0;
+  left: 0;
+}
+
+.app-shot .avatar-stack-front {
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 0 2px var(--avatar-ring);
+}
+
+.app-shot .sidebar {
+  --avatar-ring: var(--bg-side);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--bg-side);
+  border-right: 1px solid var(--border);
+}
+
+.app-shot .sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  bottom: 0;
+  width: 6px;
+  z-index: 2;
+  cursor: col-resize;
+  -webkit-app-region: no-drag;
+}
+
+.app-shot .sidebar-resizer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 2px;
+  transition: background 120ms;
+}
+
+.app-shot .sidebar-resizer:hover::after,
+.app-shot .sidebar-resizer:focus-visible::after {
+  background: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.app-shot .sidebar-resizer:focus-visible {
+  outline: none;
+}
+
+.app-shot .sidebar-toggle.floating {
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  z-index: 3;
+  -webkit-app-region: no-drag;
+}
+
+.app-shot .sidebar-collapsed .conversation-header {
+  padding-left: 50px;
+}
+
+.app-shot .sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--titlebar);
+  flex: none;
+  gap: 4px;
+  padding: 0 12px 0 10px;
+}
+
+.app-shot .sidebar-header,
+.app-shot .conversation-header {
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.app-shot .sidebar-header :is(a, button, input, select, label) {
+  -webkit-app-region: no-drag;
+}
+
+.app-shot .sidebar-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.app-shot .search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 12px 8px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: var(--bg-input);
+  color: var(--text-muted);
+}
+
+.app-shot .search input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--text);
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  outline: none;
+}
+
+.app-shot .thread-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 8px 8px;
+  animation:
+    scroll-fade-top linear both,
+    scroll-fade-bottom linear both;
+  animation-timeline: scroll(self), scroll(self);
+  animation-range:
+    0 24px,
+    calc(100% - 24px) 100%;
+}
+
+@property --fade-top {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --fade-bottom {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+.app-shot .thread-list,
+.app-shot .message-list {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 var(--fade-top),
+    #000 calc(100% - var(--fade-bottom)),
+    transparent
+  );
+}
+
+.app-shot .section-label {
+  padding: 8px 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Fixed-width tiles: they keep their places and spacing however wide the sidebar is. */
+.app-shot .pinned-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 76px);
+  gap: 4px 2px;
+  justify-content: start;
+  padding: 4px 0 8px;
+  margin-bottom: 4px;
+}
+
+.app-shot .pinned {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 8px 4px;
+  border-radius: var(--radius);
+}
+
+.app-shot .pinned:hover {
+  background: var(--bg-hover);
+}
+
+.app-shot .pinned-avatar {
+  position: relative;
+}
+
+.app-shot .pinned-title {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.app-shot .thread-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+.app-shot .thread-row:hover {
+  background: var(--bg-hover);
+}
+
+.app-shot .thread-row.active {
+  --avatar-ring: var(--bg-active);
+  background: var(--bg-active);
+  color: var(--text-on-accent);
+}
+
+.app-shot .thread-row.active .thread-time,
+.app-shot .thread-row.active .thread-preview {
+  color: color-mix(in srgb, var(--text-on-accent) 85%, transparent);
+}
+
+.app-shot .row-avatar {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+.app-shot .unread-dot {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--avatar-ring);
+}
+
+.app-shot .thread-row.active .unread-dot {
+  background: var(--text-on-accent);
+}
+
+.app-shot .thread-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-shot .thread-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.app-shot .thread-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.app-shot .thread-top .icon {
+  flex: none;
+  opacity: 0.6;
+}
+
+.app-shot .thread-time {
+  flex: none;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.app-shot .thread-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.app-shot .thread-preview.multi {
+  -webkit-line-clamp: 2;
+}
+
+.app-shot .thread-preview mark {
+  background: rgba(255, 204, 0, 0.45);
+  color: inherit;
+  border-radius: 2px;
+}
+
+/* A conversation with a draft waiting (the user's or an agent's): "Draft: …" in the list. */
+.app-shot .thread-preview.has-draft {
+  color: var(--text-muted);
+}
+
+.app-shot .draft-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.app-shot .draft-count {
+  display: inline-block;
+  min-width: 15px;
+  margin-left: 4px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 15px;
+  text-align: center;
+  vertical-align: 1px;
+}
+
+.app-shot .thread-row.active .draft-label,
+.app-shot .thread-row.active .draft-count {
+  color: var(--text-on-accent);
+}
+
+.app-shot .thread-row.active .draft-count {
+  background: color-mix(in srgb, var(--text-on-accent) 20%, transparent);
+}
+
+/* Read by screen readers, not shown. */
+.app-shot .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app-shot .dock-slot {
+  position: relative;
+  flex: none;
+  height: 52px;
+}
+
+.app-shot .dock {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 6;
+  width: calc(var(--sidebar-width, 300px) - 20px);
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition:
+    width 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s,
+    box-shadow 0.3s;
+}
+
+.app-shot .dock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid var(--border);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.app-shot .dock.open {
+  width: calc(100cqw - 20px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+  transition:
+    width 0.42s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s;
+}
+
+.app-shot .dock-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 7px;
+  box-shadow: inset 0 1px 0 transparent;
+  transition: box-shadow 0.3s;
+}
+
+.app-shot .dock.open .dock-bar {
+  box-shadow: inset 0 1px 0 var(--border);
+}
+
+.app-shot .dock-toggle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 6px 9px 13px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+
+  line-height: 16px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.app-shot .dock-toggle:focus-visible {
+  outline-offset: -2px;
+}
+
+.app-shot button.dock-toggle:hover {
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+}
+
+.app-shot .dock-label {
+  flex: none;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.app-shot .dock-label.ok {
+  color: var(--ok);
+}
+
+.app-shot .dock-phone {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+.app-shot .dock-chevron {
+  display: grid;
+  margin-left: auto;
+  color: var(--text-muted);
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.app-shot .dock.open .dock-chevron {
+  transform: none;
+}
+
+.app-shot .dock .status-dot.ok {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent);
+  animation: dock-pulse 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shot .dock,
+  .app-shot .dock.open,
+  .app-shot .dock-timeline {
+    transition: none;
+  }
+  .app-shot .dock .status-dot.ok {
+    animation: none;
+  }
+}
+
+.app-shot .dock-timeline {
+  max-height: 0;
+  padding: 0 15px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    max-height 0.25s,
+    opacity 0.15s,
+    padding 0.25s,
+    visibility 0s 0.25s;
+}
+
+.app-shot .dock.open .dock-timeline {
+  max-height: 60px;
+  padding: 8px 15px 4px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    max-height 0.35s 0.18s,
+    opacity 0.3s 0.3s,
+    padding 0.35s 0.18s,
+    visibility 0s;
+}
+
+.app-shot .link-strip {
+  position: relative;
+  height: 32px;
+}
+
+.app-shot .link-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 13px;
+  height: 6px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(-45deg, var(--border) 0 3px, transparent 3px 6px);
+}
+
+.app-shot .link-seg {
+  position: absolute;
+  top: 13px;
+  height: 6px;
+  min-width: 2px;
+  border-radius: 3px;
+  background: var(--ok);
+}
+
+.app-shot .link-seg::before {
+  content: "";
+  position: absolute;
+  inset: -4px 0;
+}
+
+.app-shot .link-gap {
+  position: absolute;
+  top: 9px;
+  height: 14px;
+}
+
+.app-shot .link-tick {
+  position: absolute;
+  top: 3px;
+  z-index: 1;
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.app-shot .link-tick::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+}
+
+.app-shot .link-tick:hover,
+.app-shot .link-tick:focus-visible {
+  outline: 2px solid var(--bg-elevated);
+  transform: translateX(-50%) scale(1.5);
+}
+
+.app-shot .link-hour {
+  position: absolute;
+  top: 20px;
+  font-size: 10px;
+  color: var(--text-muted);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.app-shot .link-now {
+  position: absolute;
+  right: 0;
+  top: 6px;
+  width: 2px;
+  height: 20px;
+  border-radius: 1px;
+  background: var(--text);
+}
+
+.app-shot .status-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.app-shot .status-dot.ok {
+  background: var(--ok);
+}
+
+.app-shot .conversation {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.app-shot .conversation-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.app-shot .conversation-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.app-shot .empty-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px;
+}
+
+.app-shot .starters {
+  list-style: none;
+  width: min(340px, 100%);
+}
+
+.app-shot .starters h2 {
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.app-shot .starter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  color: var(--text);
+  text-align: left;
+}
+
+.app-shot .starter:hover,
+.app-shot .starter:focus-visible {
+  background: var(--bg-hover);
+}
+
+.app-shot .starter .icon {
+  flex: none;
+  color: var(--text-muted);
+}
+
+.app-shot .starter-label {
+  flex: 1;
+  font-size: 14px;
+}
+
+.app-shot .starters ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-shot .starter-keys {
+  display: flex;
+  gap: 3px;
+}
+
+.app-shot .starter-keys kbd {
+  min-width: 22px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--bg-input);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+}
+
+.app-shot .conversation-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--titlebar);
+  flex: none;
+  padding: 0 12px 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-shot .conversation-header.blank {
+  border-bottom-color: transparent;
+}
+
+.app-shot .conversation-who {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-shot .conversation-title {
+  display: block;
+  flex: 1;
+  min-width: 0;
+}
+
+.app-shot .conversation-title h2 {
+  font-size: 15px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .conversation-title p {
+  font-size: 12px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .message-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px 8px;
+  animation: scroll-fade-bottom linear both;
+  animation-timeline: scroll(self);
+  animation-range: calc(100% - 24px) 100%;
+}
+
+.app-shot .day-divider {
+  padding: 12px 0 8px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.app-shot .day-divider {
+  font-weight: 600;
+}
+
+.app-shot .bubble-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.app-shot .bubble-row.start {
+  margin-top: 12px;
+}
+
+.app-shot .bubble-row.in {
+  align-items: flex-start;
+}
+
+.app-shot .bubble-row.out {
+  align-items: flex-end;
+}
+
+.app-shot .bubble-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.app-shot .bubble-row.out .bubble-line {
+  flex-direction: row-reverse;
+}
+
+.app-shot .bubble-time {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.app-shot .bubble-row:hover .bubble-time {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+
+.app-shot .bubble-action {
+  flex: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.app-shot .bubble-row:hover .bubble-action,
+.app-shot .bubble-action:focus-visible {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+
+.app-shot .bubble {
+  position: relative;
+  max-width: min(70%, 560px);
+  padding: 7px 12px;
+  border-radius: 18px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.app-shot .in .bubble {
+  background: var(--bubble-in);
+  color: var(--bubble-in-text);
+}
+
+.app-shot .out .bubble {
+  background: var(--bubble-out);
+  color: var(--bubble-out-text);
+}
+
+.app-shot .bubble a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* A preview of the first link in a message. */
+.app-shot .link-card {
+  display: block;
+  width: min(300px, 70%);
+  margin-top: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-shot .link-card:hover {
+  border-color: color-mix(in srgb, var(--text) 25%, transparent);
+}
+
+.app-shot .link-card img {
+  display: block;
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  background: var(--bg-input);
+}
+
+.app-shot .link-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px 9px;
+}
+
+.app-shot .link-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* The page names itself (og:site_name); the host it's really on leads the card. */
+.app-shot .link-card-host {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .link-card-host .icon {
+  flex: none;
+}
+
+.app-shot .link-card-site {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.app-shot .gif-card,
+.app-shot .video-card {
+  display: block;
+  width: min(300px, 70%);
+  margin-top: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-shot .video-card {
+  width: min(360px, 75%);
+}
+
+.app-shot .video-card.small {
+  width: min(260px, 70%);
+}
+
+.app-shot .gif-card img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: var(--bg-input);
+}
+
+.app-shot .video-card lite-youtube {
+  overflow: hidden;
+  border-radius: 14px;
+  background-color: var(--bg-input);
+  background-size: auto 136%;
+}
+
+.app-shot .video-card lite-youtube > iframe {
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+}
+
+.app-shot .video-card lite-youtube::before {
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-shot .media-caption {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  padding: 4px 6px 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.app-shot .media-caption-site {
+  flex: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.app-shot .media-caption-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot a.media-caption:hover .media-caption-title,
+.app-shot .gif-card:hover .media-caption-title {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.app-shot .post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(360px, 75%);
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.app-shot .post-card:hover {
+  border-color: color-mix(in srgb, var(--text) 25%, transparent);
+}
+
+.app-shot .post-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.app-shot .post-avatar {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-input);
+}
+
+.app-shot .post-who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.app-shot .post-author {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .post-handle {
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .post-brand {
+  margin-left: auto;
+  color: #1185fe;
+}
+
+.app-shot .post-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+  font-size: 13.5px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.app-shot .post-foot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.app-shot .post-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.app-shot .post-date {
+  margin-left: auto;
+}
+
+.app-shot .tapbacks {
+  position: absolute;
+  top: -18px;
+  display: flex;
+  pointer-events: auto;
+}
+
+.app-shot .in .tapbacks {
+  right: -14px;
+  flex-direction: row-reverse;
+}
+
+.app-shot .out .tapbacks {
+  left: -14px;
+}
+
+.app-shot .tapback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 14px;
+  background: var(--bubble-in);
+  color: var(--text-muted);
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+.app-shot .in .tapbacks .tapback + .tapback {
+  margin-right: -8px;
+}
+
+.app-shot .out .tapbacks .tapback + .tapback {
+  margin-left: -8px;
+}
+
+.app-shot .bubble:has(.tapbacks) {
+  margin-top: 16px;
+}
+
+.app-shot .send-status {
+  margin: 2px 4px 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* 10px below, the same as the connection dock's inset, so their bottom edges line up. */
+.app-shot .composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px 16px 10px;
+}
+
+.app-shot .composer-field {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 0;
+  padding: 3px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.app-shot .composer-field:focus-within {
+  border-color: var(--accent);
+}
+
+.app-shot .composer textarea {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 4px 4px 4px 11px;
+  resize: none;
+  box-sizing: border-box;
+  max-height: 180px;
+  overflow-y: hidden;
+  outline: none;
+}
+
+.app-shot .send-button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.app-shot .code-chip {
+  padding: 0 3px;
+  margin: 0 -1px;
+  border-radius: 5px;
+  font: inherit;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  box-shadow: inset 0 -1.5px 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  cursor: copy;
+  transition: background 120ms;
+}
+
+.app-shot .code-chip:hover {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.app-shot .code-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin: 4px 0 0 4px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  animation: code-pill-in 180ms ease-out backwards;
+}
+
+.app-shot .code-pill:hover {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shot .code-pill {
+    animation: none;
+  }
+}
+
+/*
+ * The composer's drafts: a small pill above the message box saying whose draft it shows (with a
+ * stepper when several are queued).
+ */
+.app-shot .draft-bar {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin: 4px 16px 0;
+  min-width: 0;
+}
+
+.app-shot .draft-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.app-shot .draft-notice-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .draft-agent {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.app-shot .draft-notice .link {
+  flex: none;
+  font-size: 12px;
+}
+
+.app-shot .draft-dot {
+  flex: none;
+}
+
+.app-shot .draft-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: -6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-shot .draft-position {
+  padding: 0 2px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.app-shot .icon-button.tiny {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.app-shot .icon-button.tiny:disabled {
+  opacity: 0.35;
+}
+
+.app-shot .icon-button.flip .icon {
+  transform: scaleX(-1);
+}
+
+/* A message held on this computer for its send delay: see-through until it goes. */
+.app-shot .bubble.scheduled {
+  opacity: 0.55;
+}
+
+.app-shot .scheduled-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-shot .scheduled-status .link {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* "Drafted by Claude Code · edited" under a message an agent wrote. */
+.app-shot .agent-caption {
+  margin: 2px 4px 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.app-shot .context-menu {
+  position: absolute;
+  z-index: 21;
+  min-width: 200px;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+}
+
+.app-shot .context-menu button {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.app-shot .context-menu button:hover,
+.app-shot .context-menu button:focus-visible {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  outline: none;
+}
+
+.app-shot .context-menu button.danger {
+  color: var(--danger);
+}
+
+.app-shot .context-menu button.danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.app-shot .context-menu hr {
+  margin: 4px -4px;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.app-shot .setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+}
+
+.app-shot .setting-label {
+  font-weight: 500;
+}
+
+.app-shot .theme-chip {
+  flex: none;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(127, 127, 127, 0.35);
+}
+
+.app-shot .palette-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-shot .palette-list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.app-shot .palette-list small {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.app-shot .palette-list button.active {
+  background: var(--bg-hover);
+}
+
+.app-shot .palette-list {
+  max-height: min(420px, 60cqh);
+  overflow-y: auto;
+}
+
+.app-shot .palette-group {
+  padding: 10px 8px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.app-shot .palette-list li:first-child .palette-group {
+  padding-top: 4px;
+}
+
+.app-shot .palette-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  color: var(--text-muted);
+}
+
+.app-shot .palette-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shot .palette-search {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.app-shot .palette {
+  width: min(560px, calc(100cqw - 32px));
+  padding: 8px;
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+}
+
+.app-shot .palette-input {
+  width: 100%;
+  padding: 10px 8px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: none;
+  border: 0;
+  outline: none;
+}
+
+.app-shot[data-theme] {
+  --bg-hover: color-mix(in srgb, var(--text) 6%, transparent);
+  --bg-input: color-mix(in srgb, var(--text) 7%, transparent);
+  --bg-active: var(--accent);
+  --bubble-out: var(--accent);
+  --bubble-out-text: var(--text-on-accent);
+  --bubble-in-text: var(--text);
+}
+
+.app-shot[data-theme="periwinkle"] {
+  --bg: #e9e8fb;
+  --bg-side: #dedcf7;
+  --bg-elevated: #f6f5ff;
+  --text: #231552;
+  --text-muted: #5d5390;
+  --text-on-accent: #ffffff;
+  --border: #d2cdf0;
+  --accent: #4b2a9a;
+  --bubble-in: #d9d0f6;
+}
+
+.app-shot[data-theme="fog"] {
+  --bg: #eeeff1;
+  --bg-side: #e6e7ea;
+  --bg-elevated: #f8f8f9;
+  --text: #2a2c31;
+  --text-muted: #676a72;
+  --text-on-accent: #ffffff;
+  --border: #dcdde1;
+  --accent: #5d6675;
+  --bubble-in: #e0e3e8;
+}
+
+.app-shot[data-theme="sand"] {
+  --bg: #f6f3ee;
+  --bg-side: #efeae2;
+  --bg-elevated: #fffdf9;
+  --text: #24201b;
+  --text-muted: #6f665b;
+  --text-on-accent: #ffffff;
+  --border: #e5ded3;
+  --accent: #b9542f;
+  --bubble-in: #f6e4da;
+}
+
+.app-shot[data-theme="mint"] {
+  --bg: #f2f7f5;
+  --bg-side: #e7f0ed;
+  --bg-elevated: #ffffff;
+  --text: #13211d;
+  --text-muted: #586b66;
+  --text-on-accent: #ffffff;
+  --border: #d9e5e1;
+  --accent: #0d8571;
+  --bubble-in: #d9f1ea;
+}
+
+.app-shot[data-theme="orchid"] {
+  --bg: #faf5fa;
+  --bg-side: #f3e9f3;
+  --bg-elevated: #ffffff;
+  --text: #2a1529;
+  --text-muted: #75607a;
+  --text-on-accent: #ffffff;
+  --border: #ecdcec;
+  --accent: #b0397f;
+  --bubble-in: #f7e1ee;
+}
+
+.app-shot[data-theme="sky"] {
+  --bg: #f2f7ff;
+  --bg-side: #e6f0ff;
+  --bg-elevated: #ffffff;
+  --text: #0f1e3a;
+  --text-muted: #4e6185;
+  --text-on-accent: #ffffff;
+  --border: #d6e4fb;
+  --accent: #0a6cff;
+  --bubble-in: #dceaff;
+}
+
+.app-shot[data-theme="coral"] {
+  --bg: #fff6f2;
+  --bg-side: #ffebe3;
+  --bg-elevated: #ffffff;
+  --text: #33150c;
+  --text-muted: #80584b;
+  --text-on-accent: #ffffff;
+  --border: #fbdcd0;
+  --accent: #d4381c;
+  --bubble-in: #ffe1d8;
+}
+
+.app-shot[data-theme="graphite"] {
+  --bg: #161616;
+  --bg-side: #1e1e1e;
+  --bg-elevated: #1e1e1e;
+  --text: #ededed;
+  --text-muted: #a1a1a1;
+  --text-on-accent: #161616;
+  --border: #2e2e2e;
+  --accent: #ededed;
+  --bubble-in: #333333;
+}
+
+.app-shot[data-theme="slate"] {
+  --bg: #1b1e24;
+  --bg-side: #22262d;
+  --bg-elevated: #22262d;
+  --text: #e3e6eb;
+  --text-muted: #9aa1ad;
+  --text-on-accent: #14171c;
+  --border: #31363f;
+  --accent: #9fb0c8;
+  --bubble-in: #2f3846;
+}
+
+.app-shot[data-theme="forest"] {
+  --bg: #0f1712;
+  --bg-side: #15201a;
+  --bg-elevated: #15201a;
+  --text: #e3eee6;
+  --text-muted: #93a89a;
+  --text-on-accent: #08140d;
+  --border: #24332a;
+  --accent: #5fd18b;
+  --bubble-in: #19362a;
+}
+
+.app-shot[data-theme="midnight"] {
+  --bg: #0d1220;
+  --bg-side: #141a2b;
+  --bg-elevated: #141a2b;
+  --text: #e6eaf5;
+  --text-muted: #95a0bb;
+  --text-on-accent: #0a1020;
+  --border: #232b42;
+  --accent: #6ea8ff;
+  --bubble-in: #1b2b4d;
+}
+
+.app-shot[data-theme="plum"] {
+  --bg: #171219;
+  --bg-side: #1f1822;
+  --bg-elevated: #1f1822;
+  --text: #f1e8f3;
+  --text-muted: #ad9cb3;
+  --text-on-accent: #1c0d16;
+  --border: #312735;
+  --accent: #e879b9;
+  --bubble-in: #42213a;
+}
+
+.app-shot[data-theme="ocean"] {
+  --bg: #06222b;
+  --bg-side: #0b2c37;
+  --bg-elevated: #0b2c37;
+  --text: #dff4f7;
+  --text-muted: #8fb7bf;
+  --text-on-accent: #032420;
+  --border: #15404d;
+  --accent: #2fd4c7;
+  --bubble-in: #0f4a4a;
+}
+
+.app-shot[data-theme="ember"] {
+  --bg: #1a100c;
+  --bg-side: #231611;
+  --bg-elevated: #231611;
+  --text: #f8ebe4;
+  --text-muted: #bfa093;
+  --text-on-accent: #1f0b03;
+  --border: #38241b;
+  --accent: #ff7a3d;
+  --bubble-in: #4a2414;
+}
+
+.app-shot[data-theme="contrast-light"] {
+  --bg: #ffffff;
+  --bg-side: #f0f0f0;
+  --bg-elevated: #ffffff;
+  --text: #000000;
+  --text-muted: #1f1f1f;
+  --text-on-accent: #ffffff;
+  --border: #4d4d4d;
+  --accent: #0000cc;
+  --bubble-in: #d6d6ff;
+}
+
+.app-shot[data-theme="contrast-dark"] {
+  --bg: #000000;
+  --bg-side: #0a0a0a;
+  --bg-elevated: #0a0a0a;
+  --text: #ffffff;
+  --text-muted: #e6e6e6;
+  --text-on-accent: #000000;
+  --border: #a0a0a0;
+  --accent: #3ff0ff;
+  --bubble-in: #003a40;
+}
+
+.app-shot[data-theme^="contrast-"] .bubble {
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.app-shot *::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.app-shot *::-webkit-scrollbar-track,
+.app-shot *::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.app-shot *::-webkit-scrollbar-button {
+  display: none;
+}
+
+.app-shot *::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--text) 22%, transparent) padding-box;
+}
+
+.app-shot *::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--accent) 60%, transparent) padding-box;
+}
+
+.app-shot .select-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  max-width: 260px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  font-size: 13px;
+}
+
+.app-shot .select-button:hover {
+  border-color: var(--border);
+}
+
+.app-shot .select-button:focus-visible,
+.app-shot .select-button[aria-expanded="true"] {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.app-shot .select-button > svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.app-shot .select-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.app-shot lite-youtube {
+  background-color: #000;
+  position: relative;
+  display: block;
+  contain: content;
+  background-position: center center;
+  background-size: cover;
+  cursor: pointer;
+  max-width: 720px;
+}
+
+.app-shot lite-youtube::before {
+  content: attr(data-title);
+  display: block;
+  position: absolute;
+  top: 0;
+
+  background-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 67%) 0%,
+    rgb(0 0 0 / 54%) 14%,
+    rgb(0 0 0 / 15%) 54%,
+    rgb(0 0 0 / 5%) 72%,
+    rgb(0 0 0 / 0%) 94%
+  );
+  height: 99px;
+  width: 100%;
+  font-family: "YouTube Noto", Roboto, Arial, Helvetica, sans-serif;
+  color: hsl(0deg 0% 93.33%);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  padding: 25px 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.app-shot lite-youtube:hover::before {
+  color: white;
+}
+
+.app-shot lite-youtube::after {
+  content: "";
+  display: block;
+  padding-bottom: calc(100% / (16 / 9));
+}
+
+.app-shot lite-youtube > iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+}
+
+.app-shot lite-youtube > .lyt-playbtn {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  background: no-repeat center/68px 48px;
+
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24 27 14v20" fill="white"/></svg>');
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  filter: grayscale(100%);
+  transition: filter 0.1s cubic-bezier(0, 0, 0.2, 1);
+  border: 0;
+}
+
+.app-shot lite-youtube:hover > .lyt-playbtn,
+.app-shot lite-youtube .lyt-playbtn:focus {
+  filter: none;
+}
+
+.app-shot .lyt-visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* A static picture of the app: no motion, nothing to click. */
+.app-shot,
+.app-shot * {
+  animation: none !important;
+  transition: none !important;
+}
+.app-shot {
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  color-scheme: light;
+}
+.app-shot.dark {
+  color-scheme: dark;
+}
+/* A crop: the whole window sits inside, moved so the cropped part shows. */
+.app-shot .shot-window {
+  position: absolute;
+  container-type: size;
+}
