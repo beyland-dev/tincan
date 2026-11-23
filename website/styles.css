@@ -1680,6 +1680,11 @@ pre code {
     height: 540px;
   }
 
+  /* Without the sidebar the conversation takes the whole window, not the sidebar's column. */
+  .app-shot.shot-hero .app {
+    grid-template-columns: 1fr;
+  }
+
   .app-shot.shot-hero .sidebar {
     display: none;
   }
