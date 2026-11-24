@@ -3,12 +3,11 @@
 A Linux desktop app, with a matching command line and MCP server, that reads and sends text messages through your iPhone over Bluetooth.
 
 > [!WARNING]
-> **Tincan is early, alpha software.** Expect bugs, rough edges and breaking changes between releases. Your
-> iPhone stays the source of truth for your messages; don't rely on Tincan as their only copy.
+> **Tincan is early, alpha software.** Expect bugs, rough edges and breaking changes between releases.
 
 Tincan runs a small local daemon (a systemd user service) that talks to your paired iPhone over BlueZ's Message Access (MAP), Phone Book Access (PBAP), and Apple Notification Center (ANCS) profiles. Messages are stored locally in an encrypted SQLCipher database with the key in your desktop keyring. A desktop app, the `tincan` CLI, and an MCP server for AI agents all drive the same typed command set.
 
-**Docs:** [tincan.beyland.dev/docs.html](https://tincan.beyland.dev/docs.html) covers installing, pairing, the app, the CLI and agent setup on one page.
+**Docs:** [tincan.beyland.dev/docs](https://tincan.beyland.dev/docs) covers installing, pairing, the app, the CLI and agent setup on one page.
 
 ## What works (and what doesn't)
 
@@ -76,7 +75,7 @@ tincan doctor --report       # redacted diagnostics for bug reports (review befo
 tincan commands              # list every command (with JSON Schemas via --json)
 ```
 
-## Agents & automation: use at your own risk
+## Agents & automation
 
 Tincan can give AI agents access to your messages through its MCP server (`tincan mcp`) or the `tincan` CLI. Agent access is **off by default**, and when you turn it on:
 
@@ -120,7 +119,7 @@ cargo test --workspace
 
 See [docs/architecture.md](docs/architecture.md), [docs/security.md](docs/security.md), [docs/troubleshooting.md](docs/troubleshooting.md) and [docs/roadmap.md](docs/roadmap.md) for more details.
 
-Tincan is open source under the MIT license so you can inspect, build and fork it, though this repo isn't accepting external pull requests. Bug reports are welcome in [Issues](https://github.com/beyland-dev/tincan/issues); please report security or privacy vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
+Tincan is open source under the MIT license so you can inspect, build and fork it, though this repo isn't accepting external pull requests. Bug reports are welcome in [Issues](https://github.com/beyland-dev/tincan/issues). Please report security or privacy vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
 
 ## Acknowledgements
 
