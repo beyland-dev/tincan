@@ -46,13 +46,12 @@ export async function runService(
   hooks: SystemHooks = {},
 ): Promise<ServiceStatus> {
   const launch = hooks.execStart
-    ? { execStart: hooks.execStart, environment: undefined, allowNewPrivileges: undefined }
+    ? { execStart: hooks.execStart, environment: undefined }
     : currentExecStart(env);
   const options = {
     env,
     systemctl: hooks.systemctl,
     environment: launch.environment,
-    allowNewPrivileges: launch.allowNewPrivileges,
   };
   switch (action) {
     case "install":
@@ -80,13 +79,12 @@ export function managedService(
 ): DaemonService | undefined {
   if (env.TINCAN_FAKE_PHONE || env.TINCAN_SOCKET || ownSocket) return undefined;
   const launch = hooks.execStart
-    ? { execStart: hooks.execStart, environment: undefined, allowNewPrivileges: undefined }
+    ? { execStart: hooks.execStart, environment: undefined }
     : currentExecStart(env);
   return daemonService(launch.execStart, {
     env,
     systemctl: hooks.systemctl,
     environment: launch.environment,
-    allowNewPrivileges: launch.allowNewPrivileges,
   });
 }
 
@@ -98,7 +96,6 @@ export function managedService(
 export function currentExecStart(env: NodeJS.ProcessEnv = process.env): {
   execStart: string[];
   environment?: Record<string, string>;
-  allowNewPrivileges?: boolean;
 } {
   const isElectron = Boolean(process.versions.electron || env.ELECTRON_RUN_AS_NODE);
   if (isElectron && env.APPIMAGE) {
@@ -110,8 +107,13 @@ export function currentExecStart(env: NodeJS.ProcessEnv = process.env): {
         "--",
         "daemon",
       ],
-      environment: { ELECTRON_RUN_AS_NODE: "1" },
-      allowNewPrivileges: true,
+      // User systemd units with ProtectSystem/ProtectHome/PrivateTmp run in an unprivileged user
+      // namespace where setuid fusermount3 cannot mount FUSE; extract-and-run works inside PrivateTmp
+      // while keeping full sandboxing (including NoNewPrivileges=yes).
+      environment: {
+        ELECTRON_RUN_AS_NODE: "1",
+        APPIMAGE_EXTRACT_AND_RUN: "1",
+      },
     };
   }
   const script = process.argv[1];

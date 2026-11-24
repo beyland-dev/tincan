@@ -12,8 +12,6 @@ export interface UnitOptions {
   execStart: string[];
   /** Extra environment variables for the service (`Environment="K=V"` lines). */
   environment?: Record<string, string>;
-  /** Omit `NoNewPrivileges=yes` (required when ExecStart runs an AppImage via setuid `fusermount3`). */
-  allowNewPrivileges?: boolean;
   /** Directories the daemon writes to; systemd specifiers like `%h` are kept as they are. */
   dataDir?: string;
   configDir?: string;
@@ -29,7 +27,6 @@ export function renderUnit(options: UnitOptions): string {
   const envLines = Object.entries(options.environment ?? {}).map(
     ([key, value]) => `Environment=${quoteArg(`${key}=${value}`)}\n`,
   );
-  const noNewPriv = options.allowNewPrivileges ? "" : "NoNewPrivileges=yes\n";
   return `[Unit]
 Description=Tincan — iPhone messages on Linux
 Documentation=https://tincan.beyland.dev
@@ -51,7 +48,8 @@ UMask=0077
 RuntimeDirectory=tincan
 RuntimeDirectoryMode=0700
 RuntimeDirectoryPreserve=yes
-${noNewPriv}PrivateTmp=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
 ProtectSystem=strict
 ProtectHome=read-only
 ReadWritePaths=${quotePath(`-${dataDir}`)} ${quotePath(`-${configDir}`)}
@@ -143,8 +141,6 @@ export interface ServiceOptions {
   systemctl?: Systemctl;
   /** Extra environment variables written into the systemd unit (`Environment=...`). */
   environment?: Record<string, string>;
-  /** Omit `NoNewPrivileges=yes` (required when ExecStart runs an AppImage via setuid `fusermount3`). */
-  allowNewPrivileges?: boolean;
 }
 
 export interface ServiceStatus extends ServiceFacts {
@@ -181,7 +177,6 @@ async function writeAndEnable(execStart: string[], options: ServiceOptions): Pro
   const unit = renderUnit({
     execStart,
     environment: options.environment,
-    allowNewPrivileges: options.allowNewPrivileges,
     dataDir: paths.dataDir,
     configDir: paths.configDir,
   });

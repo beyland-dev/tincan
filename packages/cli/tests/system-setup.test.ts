@@ -4,14 +4,42 @@ import {
   mkdtempSync,
   readdirSync,
   readFileSync,
+  realpathSync,
   rmSync,
   statSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { renderUnit } from "@beyland/tincan-daemon";
 import { describe, expect, it } from "vite-plus/test";
-import { setupInvocation } from "../src/system.ts";
+import { currentExecStart, setupInvocation } from "../src/system.ts";
+
+describe("currentExecStart", () => {
+  it("uses APPIMAGE_EXTRACT_AND_RUN=1 and keeps NoNewPrivileges=yes for AppImage units", () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "tincan-appimage-test-"));
+    try {
+      const appImage = path.join(dir, "Tincan.AppImage");
+      writeFileSync(appImage, "");
+      const launch = currentExecStart({
+        ELECTRON_RUN_AS_NODE: "1",
+        APPIMAGE: appImage,
+      });
+      expect(launch.execStart[0]).toBe(realpathSync(appImage));
+      expect(launch.execStart.at(-1)).toBe("daemon");
+      expect(launch.environment).toEqual({
+        ELECTRON_RUN_AS_NODE: "1",
+        APPIMAGE_EXTRACT_AND_RUN: "1",
+      });
+      const unit = renderUnit(launch);
+      expect(unit).toContain("Environment=ELECTRON_RUN_AS_NODE=1\n");
+      expect(unit).toContain("Environment=APPIMAGE_EXTRACT_AND_RUN=1\n");
+      expect(unit).toContain("NoNewPrivileges=yes\n");
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
 
 describe("setupInvocation", () => {
   it("runs the script through sudo without ELECTRON_RUN_AS_NODE", () => {

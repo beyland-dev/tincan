@@ -5,6 +5,13 @@ All notable changes to Tincan are documented in this file. Tincan follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Background systemd user service installed from an AppImage now sets `APPIMAGE_EXTRACT_AND_RUN=1`
+  (while keeping `NoNewPrivileges=yes`), fixing startup failures (`Cannot mount AppImage, please
+  check your FUSE setup`) caused by systemd's user-namespace sandboxing blocking setuid
+  `fusermount3`.
+
 ## [0.1.1] - 2026-11-24
 
 ### Fixed
