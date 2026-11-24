@@ -732,7 +732,7 @@ dependencies = [
 
 [[package]]
 name = "tincan-bt"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "base64",
  "futures-util",
@@ -748,7 +748,7 @@ dependencies = [
 
 [[package]]
 name = "tincan-napi"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "futures-util",
  "napi",
@@ -764,7 +764,7 @@ dependencies = [
 
 [[package]]
 name = "tincan-vault"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "futures-util",
  "libc",

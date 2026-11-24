@@ -5,6 +5,15 @@ All notable changes to Tincan are documented in this file. Tincan follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-24
+
+### Fixed
+
+- Desktop `.AppImage` and `.deb` packages now include the bundled daemon's `node_modules` directory
+  (including `@beyland/*` workspace packages and the native Bluetooth/SQLCipher addon), which
+  `electron-builder` previously excluded by default.
+- Release workflow no longer fails when optional GPG signing (`SHA256SUMS.asc`) is unconfigured.
+
 ## [0.1.0] - 2026-11-23
 
 The first public release.
@@ -111,5 +120,6 @@ Apple's iPhone shares only part of Messages over Bluetooth:
 Tincan is alpha software: expect bugs and breaking changes before 1.0, and keep your iPhone as the
 source of truth for your messages.
 
-[Unreleased]: https://github.com/beyland-dev/tincan/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/beyland-dev/tincan/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/beyland-dev/tincan/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/beyland-dev/tincan/releases/tag/v0.1.0

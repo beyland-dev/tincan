@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan-protocol",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tincan wire protocol: entities, envelope, events, error codes and typed command contracts.",
   "keywords": [
     "imessage",
