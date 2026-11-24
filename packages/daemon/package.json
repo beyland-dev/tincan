@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan-daemon",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tincan daemon: the Unix socket server that hosts the core and the Bluetooth layer.",
   "keywords": [
     "bluetooth",

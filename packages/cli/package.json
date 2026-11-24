@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The `tincan` command line: run the daemon and call any Tincan command.",
   "keywords": [
     "bluetooth",

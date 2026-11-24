@@ -191,6 +191,33 @@ jobs:
             zsyncmake -u "$f" -o "$f.zsync" "$f"
           done
           ls -l
+      - name: Smoke-test packaged daemon bundle
+        env:
+          EXPECTED_VERSION: ${{ needs.guard.outputs.version }}
+        run: |
+          release_dir="$PWD/apps/desktop/release"
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          for f in "$release_dir"/*.AppImage; do
+            (cd "$tmp" && "$f" --appimage-extract >/dev/null)
+            actual="$(APPDIR="$tmp/squashfs-root" ELECTRON_RUN_AS_NODE=1 "$tmp/squashfs-root/tincan-desktop" -e '
+              const bin = process.env.APPDIR + "/resources/daemon/dist/bin.mjs";
+              process.argv.splice(1, 0, bin);
+              await import(bin);
+            ' -- --version)"
+            echo "$(basename "$f") --version => $actual"
+            test "$actual" = "$EXPECTED_VERSION"
+            APPDIR="$tmp/squashfs-root" ELECTRON_RUN_AS_NODE=1 "$tmp/squashfs-root/tincan-desktop" -e '
+              const mod = await import(process.env.APPDIR + "/resources/daemon/node_modules/@beyland/tincan-native/index.js");
+              if (typeof mod.Vault !== "function") throw new Error("native addon failed to load");
+              console.log("native addon loaded ok");
+            '
+            rm -rf "$tmp/squashfs-root"
+          done
+          for f in "$release_dir"/*.deb; do
+            dpkg-deb -c "$f" | grep -q "resources/daemon/node_modules/@beyland/tincan-native/tincan-native\.linux-.*\.node"
+            echo "$(basename "$f") contains bundled native addon"
+          done
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: desktop-${{ matrix.arch }}

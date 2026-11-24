@@ -1,6 +1,6 @@
 {
   "name": "tincan",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "iPhone messages on Linux over Bluetooth, with an agent-drivable core.",
   "homepage": "https://tincan.beyland.dev",
