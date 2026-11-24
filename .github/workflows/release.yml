@@ -375,7 +375,10 @@ jobs:
           PRERELEASE: ${{ needs.guard.outputs.prerelease }}
         run: |
           shopt -s nullglob
-          assets=(dist-release/*.AppImage dist-release/*.AppImage.zsync dist-release/*.deb dist-release/SHA256SUMS dist-release/SHA256SUMS.asc)
+          assets=(dist-release/*.AppImage dist-release/*.AppImage.zsync dist-release/*.deb dist-release/SHA256SUMS)
+          if [ -f dist-release/SHA256SUMS.asc ]; then
+            assets+=(dist-release/SHA256SUMS.asc)
+          fi
           if gh release view "$TAG" >/dev/null 2>&1; then
             # Rerun after a partial failure: replace the assets, keep the notes.
             gh release upload "$TAG" "${assets[@]}" --clobber
