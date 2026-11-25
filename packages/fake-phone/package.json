@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan-fake-phone",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "A scripted iPhone for Tincan: implements the core's PhonePort for tests, demos and TINCAN_FAKE_PHONE.",
   "keywords": [

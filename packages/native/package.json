@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan-native",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Native layer for Tincan: BlueZ, MAP, bMessage and vCard (napi-rs bindings for the tincan-bt crate).",
   "keywords": [
     "bluetooth",

@@ -5,6 +5,8 @@ All notable changes to Tincan are documented in this file. Tincan follows
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-25
+
 ### Fixed
 
 - Background systemd user service installed from an AppImage now sets `APPIMAGE_EXTRACT_AND_RUN=1`
@@ -127,6 +129,7 @@ Apple's iPhone shares only part of Messages over Bluetooth:
 Tincan is alpha software: expect bugs and breaking changes before 1.0, and keep your iPhone as the
 source of truth for your messages.
 
-[Unreleased]: https://github.com/beyland-dev/tincan/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/beyland-dev/tincan/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/beyland-dev/tincan/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/beyland-dev/tincan/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/beyland-dev/tincan/releases/tag/v0.1.0
