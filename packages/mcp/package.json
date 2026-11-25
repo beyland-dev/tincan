@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Model Context Protocol server for Tincan, generated from the command contracts.",
   "keywords": [
     "imessage",

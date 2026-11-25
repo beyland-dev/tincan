@@ -1,6 +1,6 @@
 {
   "name": "@beyland/tincan-core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Headless core for Tincan: command registry, agent policy, events, sync and store.",
   "keywords": [
     "imessage",
